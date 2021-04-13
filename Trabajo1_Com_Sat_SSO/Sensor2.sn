@@ -9,7 +9,7 @@ BEGIN Sensor
 
         BEGIN SimpleCone
 
-            ConeAngle		  4.5000000000000000e+01
+            ConeAngle		  5.9999999999999993e+01
             AngularPatternResolution		  4.0000000000000000e+00
 
         END SimpleCone
