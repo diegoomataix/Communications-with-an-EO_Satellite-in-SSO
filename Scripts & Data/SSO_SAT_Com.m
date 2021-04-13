@@ -13,9 +13,12 @@ clear all; close all; clc;
 
 figure()
 hold on
-histogram(Elevation10)
-histogram(Elevation20)
-histogram(Elevation30)
-xlabel(Time)
-ylabel(Range)
+histogram(Elevation10(:,2))
+histogram(Elevation20(:,2))
+histogram(Elevation30(:,2))
+grid on
+grid minor
+set(gca,'FontSize',18)
+xlabel('Range [km]')
+ylabel('Frequency')
 hold off
