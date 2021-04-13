@@ -1,0 +1,173 @@
+stk.v.12.0
+WrittenBy    STK_v12.1.0
+BEGIN Access
+    Scenario/Trabajo1_Com_Sat_SSO/Satellite/BestSAT
+    Scenario/Trabajo1_Com_Sat_SSO/Place/Cebreros_Station/Sensor/Sensor2
+
+    IsComputed		 Yes
+    SaveComputedData		 Yes
+    ComputationMode		 1
+    UpdateOnReference		 Yes
+    DupIsDifferent		 No
+    UIOrderReversed		 No
+    UITimePeriod		 Object
+    UseLightTimeDelay		 Yes
+    ClockHost		 Base
+    TimeSense		 Transmit
+    AberrationType		 Annual
+    TimeDelayConvergence		 5e-05
+    SetMaxStepFromInsts		 Yes
+    MaxTimeStep		 360
+    MinTimeStep		 0.01
+    TimeConvergence		 0.005
+    AbsValueConvergence		 1e-14
+    RelValueConvergence		 1e-08
+    DetectEventsUsingSamplesOnly		 No
+
+    BEGIN ConsideredIntervals
+
+        2021-04-13T10:00:00.000000000 2021-04-14T10:00:00.000000000
+
+    END ConsideredIntervals
+
+    BEGIN AccessIntervals
+
+        2021-04-13T12:19:20.729198473 2021-04-13T12:21:18.566857693
+        2021-04-13T23:37:52.075389159 2021-04-13T23:41:09.075501897
+
+    END AccessIntervals
+
+    BEGIN StageList
+
+        BEGIN Stage
+
+            MaxRelMotion		 0.34
+
+            BEGIN ConstraintList
+
+                BEGIN Constraint
+
+                    Name		 LineOfSight
+                    Instance		 Object2
+                    Action		 IncludeIntervals
+                    Type		 ZeroBound
+                    ComputationID		 1
+
+                    BEGIN ConstraintInputTimes
+
+                        2021-04-13T10:00:00.000000000 2021-04-14T10:00:00.000000000
+
+                    END ConstraintInputTimes
+
+                    StartConstrainedByAvailability		 No
+                    StopConstrainedByAvailability		 No
+
+                    BEGIN ConstraintSatisfaction
+
+                        2021-04-13T10:35:40.872205899 2021-04-13T10:43:15.512359314
+                        2021-04-13T12:12:45.326535634 2021-04-13T12:27:47.759003979
+                        2021-04-13T13:52:58.092146630 2021-04-13T14:06:18.119406097
+                        2021-04-13T21:55:13.333364558 2021-04-13T22:06:13.018218289
+                        2021-04-13T23:31:57.687525235 2021-04-13T23:47:08.642730368
+                        2021-04-14T01:13:47.025787433 2021-04-14T01:25:53.436951532
+
+                    END ConstraintSatisfaction
+
+                END Constraint
+
+            END ConstraintList
+
+        END Stage
+
+
+        BEGIN Stage
+
+            MaxRelMotion		 0.17
+
+            BEGIN ConstraintList
+
+                BEGIN Constraint
+
+                    Name		 FieldOfView
+                    Instance		 Object2
+                    Action		 IncludeIntervals
+                    Type		 ZeroBound
+                    ComputationID		 2
+
+                    BEGIN ConstraintInputTimes
+
+                        2021-04-13T10:35:40.872205899 2021-04-13T10:43:15.512359314
+                        2021-04-13T12:12:45.326535634 2021-04-13T12:27:47.759003979
+                        2021-04-13T13:52:58.092146630 2021-04-13T14:06:18.119406097
+                        2021-04-13T21:55:13.333364558 2021-04-13T22:06:13.018218289
+                        2021-04-13T23:31:57.687525235 2021-04-13T23:47:08.642730368
+                        2021-04-14T01:13:47.025787433 2021-04-14T01:25:53.436951532
+
+                    END ConstraintInputTimes
+
+                    StartConstrainedByAvailability		 No
+                    StopConstrainedByAvailability		 No
+
+                    BEGIN ConstraintSatisfaction
+
+                        2021-04-13T12:19:20.729198473 2021-04-13T12:21:18.566857693
+                        2021-04-13T23:37:52.075389159 2021-04-13T23:41:09.075501897
+
+                    END ConstraintSatisfaction
+
+                END Constraint
+
+            END ConstraintList
+
+        END Stage
+
+
+    END StageList
+
+    Show		 Yes
+    Inherit		 Yes
+    ShowIV		 Yes
+    ShowLineGfx		 Yes
+    ShowHiliteGfx		 Yes
+    LineWidth		 1
+
+    BEGIN Crdn
+    END Crdn
+
+END Access
+
+BEGIN Access
+    Scenario/Trabajo1_Com_Sat_SSO/Satellite/BestSAT
+    Scenario/Trabajo1_Com_Sat_SSO/Place/Cebreros_Station
+
+    IsComputed		 No
+    SaveComputedData		 Yes
+    ComputationMode		 1
+    UpdateOnReference		 Yes
+    DupIsDifferent		 No
+    UIOrderReversed		 No
+    UITimePeriod		 Object
+    UseLightTimeDelay		 Yes
+    ClockHost		 Base
+    TimeSense		 Transmit
+    AberrationType		 Annual
+    TimeDelayConvergence		 5e-05
+    SetMaxStepFromInsts		 Yes
+    MaxTimeStep		 360
+    MinTimeStep		 0.01
+    TimeConvergence		 0.005
+    AbsValueConvergence		 1e-14
+    RelValueConvergence		 1e-08
+    DetectEventsUsingSamplesOnly		 No
+    Show		 Yes
+    Inherit		 Yes
+    ShowIV		 Yes
+    ShowLineGfx		 Yes
+    ShowHiliteGfx		 Yes
+    LineWidth		 1
+
+    BEGIN Crdn
+    END Crdn
+
+END Access
+

@@ -1,0 +1,25 @@
+<?xml version = "1.0" standalone = "yes"?>
+<TimelineLine_Prefs STK_version = "12.1.0">
+    <Views Type = "Content">
+        <ContentView Name = "Scenario Availability">
+            <Row ClassName = "Scenario" ComponentName = "AvailabilityIntervals" DisplayName = "Trabajo1_Com_Sat_SSO AvailabilityIntervals" IsDefaultName = "True" IsExpanded = "False" IsGroup = "False" IsHidden = "False" Path = "/Application/STK/Scenario/Trabajo1_Com_Sat_SSO" Type = "IntervalList">
+                <Interval Name = "Trabajo1_Com_Sat_SSO AvailabilityIntervals" StartTime = "13 Apr 2021 10:00:00.000" StopTime = "14 Apr 2021 10:00:00.000" />
+            </Row>
+            <Row ClassName = "Access" ComponentName = "AccessIntervals" DisplayName = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" IsDefaultName = "True" IsExpanded = "False" IsGroup = "False" IsHidden = "False" Path = "Access:/Application/STK/Scenario/Trabajo1_Com_Sat_SSO/Satellite/BestSAT;/Application/STK/Scenario/Trabajo1_Com_Sat_SSO/Place/Cebreros_Station" Type = "IntervalList">
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "13 Apr 2021 10:35:40.872" StopTime = "13 Apr 2021 10:43:15.512" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "13 Apr 2021 12:12:45.327" StopTime = "13 Apr 2021 12:27:47.759" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "13 Apr 2021 13:52:58.092" StopTime = "13 Apr 2021 14:06:18.119" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "13 Apr 2021 21:55:13.333" StopTime = "13 Apr 2021 22:06:13.018" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "13 Apr 2021 23:31:57.688" StopTime = "13 Apr 2021 23:47:08.643" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station AccessIntervals" StartTime = "14 Apr 2021 01:13:47.026" StopTime = "14 Apr 2021 01:25:53.437" />
+            </Row>
+            <Row ClassName = "Access" ComponentName = "AccessIntervals" DisplayName = "Satellite-BestSAT-To-Place-Cebreros_Station-Sensor-Sensor2 AccessIntervals" IsDefaultName = "True" IsExpanded = "False" IsGroup = "False" IsHidden = "False" Path = "Access:/Application/STK/Scenario/Trabajo1_Com_Sat_SSO/Satellite/BestSAT;/Application/STK/Scenario/Trabajo1_Com_Sat_SSO/Place/Cebreros_Station/Sensor/Sensor2" Type = "IntervalList">
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station-Sensor-Sensor2 AccessIntervals" StartTime = "13 Apr 2021 12:19:20.729" StopTime = "13 Apr 2021 12:21:18.567" />
+                <Interval Name = "Satellite-BestSAT-To-Place-Cebreros_Station-Sensor-Sensor2 AccessIntervals" StartTime = "13 Apr 2021 23:37:52.075" StopTime = "13 Apr 2021 23:41:09.076" />
+            </Row>
+        </ContentView>
+    </Views>
+    <Views Type = "Time">
+        <TimeView FullViewRulerStartTime = "0.000000" FullViewRulerStopTime = "0.000000" GlobalIntervalComp = "AnalysisInterval" GlobalIntervalCompPath = "/Application/STK/Scenario/Trabajo1_Com_Sat_SSO" GlobalStartOffset = "0.000000" GlobalStartTime = "13 Apr 2021 10:00:00.000" GlobalStopOffset = "0.000000" GlobalStopTime = "14 Apr 2021 10:00:00.000" MaxFullViewTime = "0.000000" MinFullViewTime = "0.000000" Name = "Scenario Analysis Period" ViewportStartTime = "0.000000" ViewportStopTime = "0.000000" />
+    </Views>
+</TimelineLine_Prefs>
