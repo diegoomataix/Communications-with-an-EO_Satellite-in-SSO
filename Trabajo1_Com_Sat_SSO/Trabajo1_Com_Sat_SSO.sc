@@ -191,10 +191,10 @@ BEGIN Scenario
             FrameType		 0
             DockCircleID		 0
             DockID		 0
-            WindowRectLeft		 -2172
-            WindowRectTop		 1026
-            WindowRectRight		 -1973
-            WindowRectBottom		 1060
+            WindowRectLeft		 535
+            WindowRectTop		 755
+            WindowRectRight		 734
+            WindowRectBottom		 789
         END Report
     END QuickReports
 
@@ -379,6 +379,11 @@ BEGIN Scenario
         BEGIN ReportFavorites
             BEGIN Class
                 Name		 Access
+                BEGIN Favorite
+                    Type		 Report
+                    BaseDir		 User
+                    Style		 AccessDurationData
+                END Favorite
                 BEGIN Favorite
                     Type		 Report
                     BaseDir		 User
@@ -1112,7 +1117,7 @@ BEGIN Scenario
 
                 StartTime		 1 May 2021 10:00:00.000000000
                 EndTime		 30 Jun 2021 10:00:00.000000000
-                CurrentTime		 13 Apr 2021 10:00:00.000000000
+                CurrentTime		 1 May 2021 10:00:00.000000000
                 Direction		 Forward
                 UpdateDelta		 20
                 RefreshDelta		 0.010000
@@ -1613,6 +1618,7 @@ BEGIN Scenario
             *		
         END Instance
         Instance Place/Cebreros_Station
+            *		
             Place/Cebreros_Station		
             Place/Cebreros_Station/Sensor/Sensor2		
         END Instance
@@ -1620,6 +1626,7 @@ BEGIN Scenario
             Place/Cebreros_Station/Sensor/Sensor2		
         END Instance
         Instance Satellite/BestSAT
+            *		
             Satellite/BestSAT		
         END Instance
     END References

@@ -13,15 +13,15 @@ clear all; close all; clc;
 %% Plot Histogram
 figure()
 hold on
-histogram(Elevation10(:,2),'BinWidth',100)
-histogram(Elevation20(:,2),'BinWidth',100)
-histogram(Elevation30(:,2),'BinWidth',100)
+histogram(Elevation10(:,2))
+histogram(Elevation20(:,2))
+histogram(Elevation30(:,2),'BinWidth',20)
 grid on
 grid minor
 set(gca,'FontSize',18)
 xlabel('Range [km]')
 ylabel('Frequency')
-legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg','Location','northwest','NumColumns',1)
+legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg')
 hold off
 
 figure()
@@ -34,5 +34,5 @@ grid minor
 set(gca,'FontSize',18)
 xlabel('Access time [s]')
 ylabel('Frequency')
-legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg','Location','northwest','NumColumns',1)
+legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg')
 hold off

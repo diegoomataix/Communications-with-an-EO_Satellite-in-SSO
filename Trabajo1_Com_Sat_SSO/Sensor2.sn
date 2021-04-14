@@ -9,7 +9,7 @@ BEGIN Sensor
 
         BEGIN SimpleCone
 
-            ConeAngle		  5.9999999999999993e+01
+            ConeAngle		  8.0000000000000000e+01
             AngularPatternResolution		  4.0000000000000000e+00
 
         END SimpleCone
@@ -94,11 +94,11 @@ BEGIN Sensor
 
             BEGIN Attributes
 
-                Inherit		 Yes
-                Show		 Yes
+                Inherit		 No
+                Show		 No
                 LineStyle		 0
                 LineWidth		 1
-                PatternColor		 #ffff00
+                PatternColor		 #ff5789
 
             END Attributes
 
