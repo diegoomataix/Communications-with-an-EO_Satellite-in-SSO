@@ -1,10 +1,10 @@
 clear all; close all; clc;
 
 %% Read Range Data
-[Elevation10,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev10.csv')); 
-[Elevation20,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev20.csv')); 
-[Elevation30,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev30.csv')); 
-
+% [Elevation10,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev10.csv')); 
+% [Elevation20,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev20.csv')); 
+% [Elevation30,~,~]=(xlsread('Satellite-To-Station_RangeDurationData_elev30.csv')); 
+load('Elevation10'); load('Elevation20'); load('Elevation30')
 %% Compute/Read Access Time Data
 [t_Elevation10,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev10.csv')); 
 [t_Elevation20,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev20.csv')); 
