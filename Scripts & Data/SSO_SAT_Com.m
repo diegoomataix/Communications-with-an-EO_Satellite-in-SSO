@@ -6,9 +6,7 @@ d10 = Elevation10(:,2);
 d20 = Elevation20(:,2);
 d30 = Elevation30(:,2);
 %% Compute/Read Access Time Data
-[t_Elevation10,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev10.csv')); 
-[t_Elevation20,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev20.csv')); 
-[t_Elevation30,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev30.csv')); 
+load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 
 av_access_time_e10 = mean(t_Elevation10)/60;         % [min]
 av_access_time_e20 = mean(t_Elevation20)/60;         % [min]
