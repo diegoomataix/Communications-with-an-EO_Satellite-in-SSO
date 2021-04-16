@@ -51,36 +51,36 @@ ylabel('Frequency')
 legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg','Location','northwest','NumColumns',1)
 hold off
 
-%% DATOS
-EIRP = 22;      
-D = 5;              % Diametro antena [m]
-T_ant = 40;         % Temperatura antena [K]
-B = 300e6;          % Bandwidth [Hz]
-NF = 2;             % Receiver noise [dB]
-L_X = 3;            % Losses due to gaseous absorption, rain attenuation... [dB]
-L_Ka = 6;           % Losses due to gaseous absorption, rain attenuation... [dB]
-eta = 0.6;          % Efficiency
-k = -228.6;         % [dBW/(K·Hz)]
-T_0 = 290;          % [K]
-c = 2.998e8;        % [ms]
-lambda = (c/8e9); % [m]
-% Antenna gain
-G = 10*log10(eta*(pi*D/lambda)^2) % [dBi]
-% G/T
-T = T_ant + T_0*(10^(NF/10)-1)    % [K]
-G_T = G - 10*log10(T)
-Lfs10 = 20*log10(4*pi*d10/lambda);
-Lfs20 = 20*log10(4*pi*d20/lambda);
-Lfs30 = 20*log10(4*pi*d30/lambda);
-
-% C/N (dB)=〖EIRP〗_sat (dBW)+G/T (dB/K)-L_fs (dB)-L_a (dB)-k(dBW/K·Hz)-10〖log〗_10 (B(Hz))
-C_N_10 = EIRP * G_T - Lfs10 - L_X - k -10*log10(B);
-C_N_20 = EIRP * G_T - Lfs20 - L_X - k -10*log10(B);
-C_N_30 = EIRP * G_T - Lfs30 - L_X - k -10*log10(B);
-
-
-%% TASK 2
-
+% %% DATOS
+% EIRP = 22;      
+% D = 5;              % Diametro antena [m]
+% T_ant = 40;         % Temperatura antena [K]
+% B = 300e6;          % Bandwidth [Hz]
+% NF = 2;             % Receiver noise [dB]
+% L_X = 3;            % Losses due to gaseous absorption, rain attenuation... [dB]
+% L_Ka = 6;           % Losses due to gaseous absorption, rain attenuation... [dB]
+% eta = 0.6;          % Efficiency
+% k = -228.6;         % [dBW/(K·Hz)]
+% T_0 = 290;          % [K]
+% c = 2.998e8;        % [ms]
+% lambda = (c/8e9); % [m]
+% % Antenna gain
+% G = 10*log10(eta*(pi*D/lambda)^2) % [dBi]
+% % G/T
+% T = T_ant + T_0*(10^(NF/10)-1)    % [K]
+% G_T = G - 10*log10(T)
+% Lfs10 = 20*log10(4*pi*d10/lambda);
+% Lfs20 = 20*log10(4*pi*d20/lambda);
+% Lfs30 = 20*log10(4*pi*d30/lambda);
+% 
+% % C/N (dB)=〖EIRP〗_sat (dBW)+G/T (dB/K)-L_fs (dB)-L_a (dB)-k(dBW/K·Hz)-10〖log〗_10 (B(Hz))
+% C_N_10 = EIRP * G_T - Lfs10 - L_X - k -10*log10(B);
+% C_N_20 = EIRP * G_T - Lfs20 - L_X - k -10*log10(B);
+% C_N_30 = EIRP * G_T - Lfs30 - L_X - k -10*log10(B);
+% 
+% 
+% %% TASK 2
+% 
 
 %% FUNCTIONS
 function plot_histogram()
