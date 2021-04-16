@@ -2,9 +2,6 @@ clear all; close all; clc;
 
 %% Read Range Data
 load('Elevation10'); load('Elevation20'); load('Elevation30')
-d10 = Elevation10(:,2);
-d20 = Elevation20(:,2);
-d30 = Elevation30(:,2);
 %% Compute/Read Access Time Data
 [t_Elevation10,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev10.csv')); 
 [t_Elevation20,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev20.csv')); 
@@ -68,12 +65,8 @@ c = 2.998e8;    % [ms]
 lambda = (c/8e9); % [m]
 % Antenna gain
 G = 10*log10(eta*(pi*D/lambda)^2) % [dBi]
-% G/T
-T = T_ant + T_0*(10^(NF/10)-1)    % [K]
-G_T = G - 10*log10(T)
-Lfs10 = 20*log10(4*pi*d10/lambda);
-Lfs20 = 20*log10(4*pi*d20/lambda);
-Lfs30 = 20*log10(4*pi*d30/lambda);
+% ..
+T = T_ant + T_0*(10^(NF/10
 %% TASK 2
 
 
