@@ -9,6 +9,7 @@ d30 = Elevation30(1:14,2);
 [t_Elevation10,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev10.csv')); 
 [t_Elevation20,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev20.csv')); 
 [t_Elevation30,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev30.csv')); 
+load('Elevation10'); load('Elevation20'); load('Elevation30')
 %% DATOS
 EIRP = 22;      
 D = 5;              % Diametro antena [m]
@@ -32,7 +33,7 @@ Lfs20 = 20*log10(4*pi*d20/lambda);
 Lfs30 = 20*log10(4*pi*d30/lambda);
 
 % C/N (dB)=〖EIRP〗_sat (dBW)+G/T (dB/K)-L_fs (dB)-L_a (dB)-k(dBW/K·Hz)-10〖log〗_10 (B(Hz))
-t10 = 0:20:t_Elevation10(1,1);t20 = 0:20:t_Elevation20(1,1);t30 = 0:20:t_Elevation30(1,1);
+t10 = 0:20:t_Elevation10(1,1)+20;t20 = 0:20:t_Elevation20(1,1)+20;t30 = 0:20:t_Elevation30(1,1)+20;
 
 C_N_10 = EIRP * G_T - Lfs10 - L_X - k -10*log10(B);
 C_N_20 = EIRP * G_T - Lfs20 - L_X - k -10*log10(B);
@@ -41,8 +42,7 @@ C_N_30 = EIRP * G_T - Lfs30 - L_X - k -10*log10(B);
 figure()
 hold on
 box on
-xlabel('\it t \rm [s]')
-xlim([0 120])
+% xlabel('\it t \rm [s]')
 set(gca,'linewidth',0.75)
 set(gca,'fontsize',14)
 yyaxis left

@@ -6,9 +6,7 @@ d10 = Elevation10(1:14,2);
 d20 = Elevation20(1:14,2);
 d30 = Elevation30(1:14,2);
 %% Compute/Read Access Time Data
-[t_Elevation10,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev10.csv')); 
-[t_Elevation20,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev20.csv')); 
-[t_Elevation30,~,~]=(xlsread('Satellite-To-Station_AccessDurationData_elev30.csv')); 
+load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
 EIRP = 22;      
 D = 5;              % Diametro antena [m]
