@@ -1,10 +1,10 @@
 clear all; close all; clc;
 
 %% Read Range Data
-load('Elevation10'); load('Elevation20'); load('Elevation30')
-d10 = 1e3*Elevation10(1:14,2);      % [m]
-d20 = 1e3*Elevation20(1:23,2);      % [m]
-d30 = 1e3*Elevation30(1:17,2);      % [m]
+load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
+d10 = 1e3*R_Elevation10_10s(1:27,2);      % [m]
+d20 = 1e3*R_Elevation20_10s(1:46,2);      % [m]
+d30 = 1e3*R_Elevation30_10s(1:33,2);      % [m]
 %% Compute/Read Access Time Data
 load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
