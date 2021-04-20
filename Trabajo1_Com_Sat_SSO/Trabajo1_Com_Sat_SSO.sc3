@@ -720,8 +720,8 @@ BEGIN SceneWindow
             UseLayer		 Yes
             FromName		 "Place/Cebreros_Station"
             FromRegPosAttView		 "Point"
-            FromPosition		  4.4583809130074382e+06  4.8209838416959280e+06  2.5005338254197650e+07
-            FromOffset		 -3.9294791432472132e+05  4.4043797793164952e+06  2.0898349802937414e+07
+            FromPosition		  4.4583809130074363e+06  4.8209838416959299e+06  2.5005338254197661e+07
+            FromOffset		 -3.9294791432472318e+05  4.4043797793164970e+06  2.0898349802937426e+07
             FromOffsetLLR		  6.8507317982520743e-01  2.8707640661030820e+00  2.1361039155194644e+07
             ToName		 "Place/Cebreros_Station"
             ToRegPosAttView		 "Point"
@@ -730,8 +730,8 @@ BEGIN SceneWindow
             ToOffsetLLR		  0.0000000000000000e+00  0.0000000000000000e+00  0.0000000000000000e+00
             ConstantDistanceType		 None
             ConstantDistanceValue		 1
-            UpVector		  9.9577638001857394e-01 -8.4253257038256257e-02  3.6479990070594492e-02
-            ViewRad		  2.1361039155194629e+07
+            UpVector		  9.9577638001857394e-01 -8.4253257038256216e-02  3.6479990070594714e-02
+            ViewRad		  2.1361039155194648e+07
             ViewQuat		  9.3328302465433544e-01  4.5343725472291478e-02  3.3280260440884557e-01 -1.2715804713441492e-01
             ViewCoordSystem		 From
             ViewFromToMode		 FromTo
@@ -746,7 +746,7 @@ BEGIN SceneWindow
             MinAngleToUpAxis		  8.7266462599716477e-03
             InitUpAxisUp		 Yes
             TempUpAxisUp		 Yes
-            CrossAxis		  2.6752991353904726e-01  9.6354955521851082e-01 -0.0000000000000000e+00
+            CrossAxis		  2.6752991353904720e-01  9.6354955521851071e-01 -0.0000000000000000e+00
             DefaultOffset		  1.8749999999999997e+02
             BaseDefaultOffset		  1.4999999999999997e+02
         END View
@@ -885,6 +885,8 @@ BEGIN AttitudeViewWindow
                     BlendAltitudeUpperAltitude		 2500000
                     TextureRole		 Day
                     URI		 "file:///Sun.jp2"
+                    BeginImageSetDefOn
+                    END
                     InBase		 Yes
                     BaseOn		 Yes
                 END
@@ -930,7 +932,7 @@ BEGIN AttitudeViewWindow
         END Border3dLineAttr
         GlobeTesselationFactor		 1
         IsShowingClouds		 No
-        CloudAltitude		 50068.37544999999
+        CloudAltitude		 50068.375
         CloudTesselationFactor		 1
         ShowingTimeAsFPS		 No
         ShowingUpdateDelta		 No

@@ -2,7 +2,7 @@
 WorkbookVersion=9.0
 Title=Trabajo1_Com_Sat_SSO
 Description=
-ApplicationVersion=12.1.0
+ApplicationVersion=12.0.1
 Scenario=YES
 ActiveMDIState=FALSE
 [WorkState_v1_2]
@@ -12,47 +12,46 @@ ptn_Child1=MainFrame
 ptn_Child2=ChildFrames
 [WorkState_v1_2.Frames.MainFrame]
 WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAAADIPPPPAADIPPPPPPPPPPPPPPPPPPPPHKOPPPPPIOAAAAAAHPDAAAAALBEAAAAA
-Title=Trabajo1_Com_Sat_SSO - STK 12 - 3D Graphics 1 - Earth
+Title=Trabajo1_Com_Sat_SSO - STK 12 - Access
 [WorkState_v1_2.Frames.ChildFrames]
 ptn_Child1=Document-0
 ptn_Child2=Document-1
 ptn_Child3=Document-2
 ptn_Child4=Document-3
 ptn_Child5=Document-4
-ptn_Child6=Document-5
 [WorkState_v1_2.Frames.ChildFrames.Document-0]
 ptn_Child1=ViewFrame-0
-ptn_Child2=ViewFrame-1
 [WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0]
-DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUi3DGfxView12.AgUiPi3DGfxView.1
+DocPathName=C:\Users\Andrea\Desktop\AgUi3DGfxView12.AgUiPi3DGfxView.1
 DocumentString=AgUi3DGfxView.AgUiPi3DGfxView.1
 DocTemplateIndex=0
 WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPAAAAAAAAAAAAAAAAEBDAAAAAHHCAAAAA
-IsActiveChildFrame=True
+IsActiveChildFrame=False
 IsFrameVisible=True
 ptn_Child1=AGI Custom Node Data
 [WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0.AGI Custom Node Data]
 MapID=1
 SceneType=1
-[WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-1]
-DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUi3DGfxView12.AgUiPi3DGfxView.1
+[WorkState_v1_2.Frames.ChildFrames.Document-1]
+ptn_Child1=ViewFrame-0
+[WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0]
+DocPathName=C:\Users\Andrea\Desktop\AgUi3DGfxView12.AgUiPi3DGfxView.1
 DocumentString=AgUi3DGfxView.AgUiPi3DGfxView.1
 DocTemplateIndex=0
 WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPEBDAAAAAAAAAAAAAICGAAAAAHHCAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-1.AGI Custom Node Data]
-AttitudeViewSatellite=Satellite/BestSAT
+[WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0.AGI Custom Node Data]
 MapID=2
 SceneType=8
-[WorkState_v1_2.Frames.ChildFrames.Document-1]
+[WorkState_v1_2.Frames.ChildFrames.Document-2]
 ptn_Child1=ViewFrame-0
-[WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0]
-DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUiAttrBrowser12.AgUiPiAttrBrowser.1
+[WorkState_v1_2.Frames.ChildFrames.Document-2.ViewFrame-0]
+DocPathName=C:\Users\Andrea\Desktop\AgUiAttrBrowser12.AgUiPiAttrBrowser.1
 DocumentString=AgUiAttrBrowser.AgUiPiAttrBrowser.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAHEBAAAAAPJCAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAHEBAAAAAEMCAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63000
@@ -60,10 +59,10 @@ ptn_Child1=AGI Custom Node Data
 [WorkState_v1_2.Frames.ChildFrames.Document-3]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-3.ViewFrame-0]
-DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUiTimelineView12.AgUiPiTimelineView.1
+DocPathName=C:\Users\Andrea\Desktop\AgUiTimelineView12.AgUiPiTimelineView.1
 DocumentString=AgUiTimelineView.AgUiPiTimelineView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAIHAAAAAIJAAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAIHAAAAAOJAAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63001
