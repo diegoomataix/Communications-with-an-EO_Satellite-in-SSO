@@ -6,9 +6,9 @@ d10 = 1e3*R_Elevation10_10s(1:27,2);      % [m]
 d20 = 1e3*R_Elevation20_10s(1:46,2);      % [m]
 d30 = 1e3*R_Elevation30_10s(1:33,2);      % [m]
 
-t10 = R_Elevation10_10s(1:27,1)-R_Elevation10_10s(1,1);      % [m]
-t20 = R_Elevation20_10s(1:46,1)-R_Elevation20_10s(1,1);      % [m]
-t30 = R_Elevation30_10s(1:33,1)-R_Elevation30_10s(1,1);      % [m]
+t10 = R_Elevation10_10s(1:27,1)-R_Elevation10_10s(1,1);      % [s]
+t20 = R_Elevation20_10s(1:46,1)-R_Elevation20_10s(1,1);      % [s]
+t30 = R_Elevation30_10s(1:33,1)-R_Elevation30_10s(1,1);      % [s]
 %% Compute/Read Access Time Data
 load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
