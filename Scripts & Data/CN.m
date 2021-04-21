@@ -2,13 +2,13 @@ clear all; close all; clc;
 
 %% Read Range Data
 load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
-d10 = 1e3*R_Elevation10_10s(1:27,2);      % [m]
-d20 = 1e3*R_Elevation20_10s(1:46,2);      % [m]
-d30 = 1e3*R_Elevation30_10s(1:33,2);      % [m]
+d10 = 1e3*R_Elevation10_10s(29:92,2);     % [m]
+d20 = 1e3*R_Elevation20_10s(56:99,2);      % [m]
+d30 = 1e3*R_Elevation30_10s(65:96,2);      % [m]
 
-t10 = R_Elevation10_10s(1:27,1)-R_Elevation10_10s(1,1);      % [s]
-t20 = R_Elevation20_10s(1:46,1)-R_Elevation20_10s(1,1);      % [s]
-t30 = R_Elevation30_10s(1:33,1)-R_Elevation30_10s(1,1);      % [s]
+t10 = R_Elevation10_10s(29:92,1)-R_Elevation10_10s(29,1);      % [s]
+t20 = R_Elevation20_10s(56:99,1)-R_Elevation20_10s(56,1);      % [s]
+t30 = R_Elevation30_10s(65:96,1)-R_Elevation30_10s(65,1);      % [s]
 %% Compute/Read Access Time Data
 load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
@@ -100,21 +100,13 @@ for i = 4:length(CNlink)-3
     end
 end
 
-if pos(length(CNlink)-2) ~= pos(length(CNlink)-3)
-    pos(length(CNlink)-2:length(CNlink)) = max(pos(length(CNlink)-2:length(CNlink)));
-else
-    pos(length(CNlink)-2:length(CNlink)) = pos(length(CNlink)-3);
-end
+pos(length(CNlink)-2:length(CNlink)) = max(pos(length(CNlink)-2:length(CNlink)));
+
+MODCOD = zeros(length(pos),1);
 
 for i = 1:length(pos)
     MODCOD(i) = CNreq(pos(i))';
 end
-
-%Intento de evitar que el pico se salga por el lado
-
-% t_fine = linspace(0,t(end),50);
-% MODCODfine = interp1(t, MODCOD, t_fine);
-% CNlink_fine = interp1(t, CNlink, t_fine);
 
 figure()
 hold on
