@@ -45,139 +45,158 @@ plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
 
 %% TASK 4
 
-CNreq = [16.13, 15.83, 14.41, 13.83, 12.90, 12.08, 11.77, 11.19, ...
-    10.35, 9.08, 8.05, 6.68, 5.63, 5.34, 4.82, 4.21, 3.23, 2.4, ...
-    1,14, -0.25, -1.3, -2.54];
+CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
+eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 
-CNreq = CNreq';
+    pos1 = plotMODCOD(CNreq,C_N_10(1:end),t10,10);
+    pos2 = plotMODCOD(CNreq,C_N_20(1:end),t20,20);
+    pos3 = plotMODCOD(CNreq,C_N_30(1:end),t30,30);
 
-% MODCODs = ['32APSK 9/10', '32APSK 8/9', '32APSK 5/6 ', '32APSK 4/5',...
-%     '32APSK 3/4', '16APSK 8/9', '16APSK 5/6 ', '16APSK 4/5', '16APSK 3/4', ...
-%     '16APSK 2/3', '8PSK 3/4', '8PSK 2/3', '8PSK 3/5 ', 'QPSK 5/6', ...
-%     'QPSK 4/5', 'QPSK 3/4', 'QPSK 2/3', 'QPSK 3/5', 'QPSK 1/2', ...
-%     'QPSK 2/5', 'QPSK 1/3', 'QPSK 1/4'];
+    Ptime10 = Access_Time_Percentage(pos1);
+    Ptime20 = Access_Time_Percentage(pos2);
+    Ptime30 = Access_Time_Percentage(pos3);
 
-plotMODCOD(C_N_10,t10,CNreq,10)
-plotMODCOD(C_N_20,t20,CNreq,20)
-plotMODCOD(C_N_30,t30,CNreq,30)
-[POSS,POSSB] = Cosas(CNreq,C_N_10(1:end));
+%% TASK 5
+    
+    % 1 pass
+    D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end));
+    D20_1Pass = Downlinked_Data(B,Ptime20,eff,t20(end));
+    D30_1Pass = Downlinked_Data(B,Ptime30,eff,t30(end));
+    
+    % 60 days
 
-for i = 1:size(POSSB,2)
-    vok(i) = CNreq(POSSB(i));
-end
-
-
-for i = 1:23
-pos = find(POSSB == i);
-porc(i) = size(pos,2);
-end
-porc = porc./size(POSSB,2)*100;
 %% FUNCTIONS
 
-function [posi,posb] = Cosas(CNreq,CN)
-for i = 1:size(CN,1);
-    pos = find(CNreq <= CN(i));
-    posi(i) = pos(1);
-end
-posb = zeros(size(posi));
-posb(1) = posi(1); posb(end) = posi(end);
-posb(2) = posi(1); posb(end-1) = posi(end);
-posb(3) = posi(1); posb(end-2) = posi(end);
+function posi = plotMODCOD(CNreq,CN,t,elev)
 
-i = 4;
-while (i < size(posi,2)/2+1)
-if posi(i) == posb(i-1)
-posb(i) = posi(i);
-i = i+1;
-else
-posb(i) = posi(i);
-posb(i+1) = posi(i);    
-posb(i+2) = posi(i);
-i = i+3;
-end
-end
-i = size(posi,2)-3;
-while (i > size(posi,2)/2-1)
-if posi(i) == posb(i+1)
-posb(i) = posi(i);
-i = i-1;
-else
-posb(i) = posi(i);
-posb(i-1) = posi(i);    
-posb(i-2) = posi(i);
-i = i-3;
-end
-end
-end
+    for i = 1:size(CN,1)
+        pos = find(CNreq <= CN(i));
+        posi(i) = pos(1);
+    end
+    
+    posb = zeros(size(posi));
+    posb(1) = posi(1); posb(end) = posi(end);
+    posb(2) = posi(1); posb(end-1) = posi(end);
+    posb(3) = posi(1); posb(end-2) = posi(end);
 
-% for i = size(posi,2)-3:-2:size(posi,2)/2
-% if posi(i) == posi(i+1)
-% posb(i) = posi(i);
-% else
-% posb(i) = posi(i-2);
-% end
-% if posi(i-1) == posb(i)
-% posb(i-1) = posi(i-1);
-% else
-% posb(i-1) = posi(i-2);
-% end
-% end
-
-
-
-
-function plotCN(t,d, C_N, elev)
-figure()
-hold on
-box on
-% xlabel('\it t \rm [s]')
-set(gca,'linewidth',0.75)
-set(gca,'fontsize',14)
-yyaxis left
-%ylabel("\it ","rotation",0,'HorizontalAlignment','right','Position',[-0.04 max(G)])
-plot(t,C_N)
-yyaxis right
-%ylabel("\it d [m]",0,'HorizontalAlignment','right','Position',[120.4 max(TT)])
-plot(t,d)
-title(['Elevación ' num2str(elev) 'º'])
-hold off
-end
-
-function plotMODCOD(CNlink,t,CNreq,elev)
-cont=0;
-pos = zeros(length(CNlink),1);
-
-for i = 1:length(CNlink)
-    for j = 1:length(CNreq)
-        if CNlink(i) > CNreq(j)
-        cont = cont+1;
-        pos(cont) = j;
-        break
+    i = 4;
+    while (i < size(posi,2)/2+1)
+        if posi(i) == posb(i-1)
+            posb(i) = posi(i);
+            i = i+1;
+        else
+            posb(i) = posi(i);
+            posb(i+1) = posi(i);    
+            posb(i+2) = posi(i);
+            i = i+3;
         end
     end
-end
-
-pos(1:3) = max(pos(1:3));
-for i = 4:length(CNlink)-3
-    if pos(i) ~= pos(i-1)
-       pos(i:i+3) = max(pos(i:i+3));
+    i = size(posi,2)-3;
+    while (i > size(posi,2)/2-1)
+        if posi(i) == posb(i+1)
+            posb(i) = posi(i);
+            i = i-1;
+        else
+            posb(i) = posi(i);
+            posb(i-1) = posi(i);    
+            posb(i-2) = posi(i);
+            i = i-3;
+        end
     end
+    
+    for i = 1:size(posb,2)
+        MODCOD(i) = CNreq(posb(i));
+    end
+
+    figure()
+    hold on
+    stairs(t,MODCOD)
+    set(gca,'linewidth',0.75)
+    set(gca,'fontsize',14)
+    plot(t,CN)
+    title(['Elevación ' num2str(elev) 'º'])
+    hold off
 end
 
-pos(length(CNlink)-2:length(CNlink)) = max(pos(length(CNlink)-2:length(CNlink)));
-
-MODCOD = zeros(length(pos),1);
-
-for i = 1:length(pos)
-    MODCOD(i) = CNreq(pos(i))';
+function plotCN(t,d, C_N, elev)
+    figure()
+    hold on
+        box on
+        % xlabel('\it t \rm [s]')
+        set(gca,'linewidth',0.75)
+        set(gca,'fontsize',14)
+        yyaxis left
+        %ylabel("\it ","rotation",0,'HorizontalAlignment','right','Position',[-0.04 max(G)])
+        plot(t,C_N)
+        yyaxis right
+        %ylabel("\it d [m]",0,'HorizontalAlignment','right','Position',[120.4 max(TT)])
+        plot(t,d)
+        title(['Elevación ' num2str(elev) 'º'])
+    hold off
 end
 
-figure()
-hold on
-stairs(t,MODCOD)
-set(gca,'linewidth',0.75)
-set(gca,'fontsize',14)
-plot(t,CNlink)
-title(['Elevación ' num2str(elev) 'º'])
-hold off
+% function plotMODCOD(CNlink,t,CNreq,elev)
+% cont=0;
+% pos = zeros(length(CNlink),1);
+% 
+% for i = 1:length(CNlink)
+%     for j = 1:length(CNreq)
+%         if CNlink(i) > CNreq(j)
+%         cont = cont+1;
+%         pos(cont) = j;
+%         break
+%         end
+%     end
+% end
+% 
+% pos(1:3) = max(pos(1:3));
+% for i = 4:length(CNlink)-3
+%     if pos(i) ~= pos(i-1)
+%        pos(i:i+3) = max(pos(i:i+3));
+%     end
+% end
+% 
+% pos(length(CNlink)-2:length(CNlink)) = max(pos(length(CNlink)-2:length(CNlink)));
+% 
+% MODCOD = zeros(length(pos),1);
+% 
+% for i = 1:length(pos)
+%     MODCOD(i) = CNreq(pos(i))';
+% end
+% 
+% figure()
+% hold on
+% stairs(t,MODCOD)
+% set(gca,'linewidth',0.75)
+% set(gca,'fontsize',14)
+% plot(t,CNlink)
+% title(['Elevación ' num2str(elev) 'º'])
+% hold off
+% end
+
+function Output = Access_Time_Percentage(pos)
+
+    pos =  sort(pos);
+    cont = 1;
+    for i = 1:length(pos)
+        aux = find(pos == i);
+        if isempty(aux)
+        else
+            Total(cont) = length(aux);
+            index(cont) = i;
+            cont = cont+1;
+        end
+    end
+    
+    t_p = (Total./length(pos))*100;
+    Output = [index; t_p];
+
+end
+
+function D = Downlinked_Data(B,Ptime,eff,t)
+
+    D = 0;
+    for i = 1:length(Ptime(2,:))
+        D = D + (B*Ptime(2,:)*(1/100)*t*eff(Ptime(1,:)))/8;
+    end
 end
