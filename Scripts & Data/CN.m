@@ -5,10 +5,14 @@ load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
 d10 = 1e3*R_Elevation10_10s(28:92,2);     % [m]
 d20 = 1e3*R_Elevation20_10s(56:98,2);      % [m]
 d30 = 1e3*R_Elevation30_10s(65:96,2);      % [m]
-%d10(1) = d10(2);
+
 t10 = R_Elevation10_10s(28:92,1)-R_Elevation10_10s(28,1);      % [s]
 t20 = R_Elevation20_10s(56:98,1)-R_Elevation20_10s(56,1);      % [s]
 t30 = R_Elevation30_10s(65:96,1)-R_Elevation30_10s(65,1);      % [s]
+
+T10 = R_Elevation10_10s(:,1); T20 = R_Elevation20_10s(:,1); T30 = R_Elevation30_10s(:,1);
+D10 = R_Elevation10_10s(:,2); D20 = R_Elevation20_10s(:,2); D30 = R_Elevation30_10s(:,2);
+
 %% Compute/Read Access Time Data
 load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
@@ -45,12 +49,12 @@ plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
 
 %% TASK 4
 
-CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
-eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
+    CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
+    eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 
-    pos1 = plotMODCOD(CNreq,C_N_10(1:end),t10,10);
-    pos2 = plotMODCOD(CNreq,C_N_20(1:end),t20,20);
-    pos3 = plotMODCOD(CNreq,C_N_30(1:end),t30,30);
+    pos1 = plotMODCOD(CNreq,C_N_10(1:end),t10,10,"YES");
+    pos2 = plotMODCOD(CNreq,C_N_20(1:end),t20,20,"YES");
+    pos3 = plotMODCOD(CNreq,C_N_30(1:end),t30,30,"YES");
 
     Ptime10 = Access_Time_Percentage(pos1);
     Ptime20 = Access_Time_Percentage(pos2);
@@ -59,15 +63,22 @@ eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 %% TASK 5
     
     % 1 pass
-    D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end));
-    D20_1Pass = Downlinked_Data(B,Ptime20,eff,t20(end));
-    D30_1Pass = Downlinked_Data(B,Ptime30,eff,t30(end));
+    D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end)-t10(1));
+    D20_1Pass = Downlinked_Data(B,Ptime20,eff,t20(end)-t20(1));
+    D30_1Pass = Downlinked_Data(B,Ptime30,eff,t30(end)-t30(1));
     
-    % 60 days
-
+    % 60 days 
+    CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
+    CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
+    CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
+    
+    D10_60Days = Download_60days(T10,CNreq,CN10,10,B,eff);
+    D20_60Days = Download_60days(T20,CNreq,CN20,20,B,eff);
+    D30_60Days = Download_60days(T30,CNreq,CN30,30,B,eff);
+      
 %% FUNCTIONS
 
-function posi = plotMODCOD(CNreq,CN,t,elev)
+function posi = plotMODCOD(CNreq,CN,t,elev,logical)
 
     for i = 1:size(CN,1)
         pos = find(CNreq <= CN(i));
@@ -140,17 +151,17 @@ function posi = plotMODCOD(CNreq,CN,t,elev)
     t_aux(end + 1) = t(end);
     MODCOD_aux(end + 1) = MODCOD_aux(end);
     
-    t_aux
-    MODCOD_aux;
-    t
-    figure()
-    hold on
-    plot(t_aux,MODCOD_aux)
-    set(gca,'linewidth',0.75)
-    set(gca,'fontsize',14)
-    plot(t,CN)
-    title(['Elevación ' num2str(elev) 'º'])
-    hold off
+    if logical == "YES"
+        figure()
+        hold on
+        plot(t_aux,MODCOD_aux)
+        set(gca,'linewidth',0.75)
+        set(gca,'fontsize',14)
+        plot(t,CN)
+        title(['Elevación ' num2str(elev) 'º'])
+        hold off
+    else
+    end
 end
 
 function plotCN(t,d, C_N, elev)
@@ -232,6 +243,36 @@ function D = Downlinked_Data(B,Ptime,eff,t)
 
     D = 0;
     for i = 1:length(Ptime(2,:))
-        D = D + (B*Ptime(2,:)*(1/100)*t*eff(Ptime(1,:)))/8;
+        D = D + (B*Ptime(2,i)*(1/100)*t*eff(Ptime(1,i)))/8;
     end
+end
+
+function Total_D = Download_60days(T,CNreq,CN,elev,B,eff)
+
+    j = 1;
+    for i = 1:length(T)-1
+        if (abs(T(i)-T(i+1)) > 10)      % New pass
+            PosF(j) = i; PosI(j+1) = i+1;
+            j = j+1;
+        else
+        end
+    end
+    PosI(1) = 1; PosF(end+1) = length(T);
+    
+    Total_D = 0;
+    for i = 1:length(PosF)
+        Pass = T(PosI(i):PosF(i));
+        Pass_pos = plotMODCOD(CNreq,CN(PosI(i):PosF(i)),Pass,elev,"NO");     % Cambiar los 10
+        Pass_time = Access_Time_Percentage(Pass_pos);
+        Pass_D = Downlinked_Data(B,Pass_time,eff,Pass(end)-Pass(1));
+        Total_D = Total_D+Pass_D;
+        clearvars Pass Pass_pos Pass_time Pass_D
+    end
+
+end
+
+function CN = CN_60Days(D,lambda,EIRP,G_T,L_X,k,B)
+
+    Lfs = 20*log10(4*pi*D/lambda);
+    CN = EIRP + G_T - Lfs - L_X - k -10*log10(B);
 end
