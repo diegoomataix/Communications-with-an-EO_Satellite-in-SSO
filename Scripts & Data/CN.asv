@@ -60,12 +60,7 @@ CNreq = CNreq';
 plotMODCOD(C_N_10,t10,CNreq,10)
 plotMODCOD(C_N_20,t20,CNreq,20)
 plotMODCOD(C_N_30,t30,CNreq,30)
-[POSS,POSSB] = Cosas(CNreq,C_N_10(1:end));
-
-for i = 1:size(POSSB,2)
-    vok(i) = CNreq(POSSB(i));
-end
-
+[POSS,POSSB] = Cosas(CNreq,C_N_20(1:end));
 
 for i = 1:23
 pos = find(POSSB == i);
