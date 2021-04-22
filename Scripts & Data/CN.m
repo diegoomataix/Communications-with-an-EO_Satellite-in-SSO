@@ -5,7 +5,7 @@ load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
 d10 = 1e3*R_Elevation10_10s(28:92,2);     % [m]
 d20 = 1e3*R_Elevation20_10s(56:98,2);      % [m]
 d30 = 1e3*R_Elevation30_10s(65:96,2);      % [m]
-
+%d10(1) = d10(2);
 t10 = R_Elevation10_10s(28:92,1)-R_Elevation10_10s(28,1);      % [s]
 t20 = R_Elevation20_10s(56:98,1)-R_Elevation20_10s(56,1);      % [s]
 t30 = R_Elevation30_10s(65:96,1)-R_Elevation30_10s(65,1);      % [s]
@@ -107,10 +107,45 @@ function posi = plotMODCOD(CNreq,CN,t,elev)
     for i = 1:size(posb,2)
         MODCOD(i) = CNreq(posb(i));
     end
-
+    
+     j = 1;
+    for i = round(size(posb,2)/2):-1:2
+        if posb(i) == posb(i-1)
+            MODCOD_aux(j) = MODCOD(i);
+            t_aux(j) = t(i);
+            j = j + 1;
+        else
+            MODCOD_aux(j) = MODCOD(i);
+            t_aux(j) = t(i);
+            MODCOD_aux(j+1) = MODCOD(i-1);
+            t_aux(j+1) = t(i);
+            j = j + 2;
+        end
+    end
+    t_aux = fliplr(t_aux);
+    MODCOD_aux = fliplr(MODCOD_aux);
+    for i = round(size(posb,2)/2):size(posb,2)-1
+        if posb(i) == posb(i+1)
+            MODCOD_aux(j) = MODCOD(i);
+            t_aux(j) = t(i);
+            j = j + 1;
+        else
+            MODCOD_aux(j) = MODCOD(i);
+            t_aux(j) = t(i);
+            MODCOD_aux(j+1) = MODCOD(i+1);
+            t_aux(j+1) = t(i);
+            j = j + 2;
+        end
+    end
+    t_aux(end + 1) = t(end);
+    MODCOD_aux(end + 1) = MODCOD_aux(end);
+    
+    t_aux
+    MODCOD_aux;
+    t
     figure()
     hold on
-    stairs(t,MODCOD)
+    plot(t_aux,MODCOD_aux)
     set(gca,'linewidth',0.75)
     set(gca,'fontsize',14)
     plot(t,CN)
