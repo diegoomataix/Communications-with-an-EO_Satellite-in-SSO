@@ -72,9 +72,9 @@ plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
     CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
     CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
     
-    D10_60Days = Download_60days(T10,CNreq,CN10,10,B,eff);
-    D20_60Days = Download_60days(T20,CNreq,CN20,20,B,eff);
-    D30_60Days = Download_60days(T30,CNreq,CN30,30,B,eff);
+    [D10_60Days,D10_60Days_med] = Download_60days(T10,CNreq,CN10,10,B,eff);
+    [D20_60Days,D20_60Days_med] = Download_60days(T20,CNreq,CN20,20,B,eff);
+    [D30_60Days,D30_60Days_med] = Download_60days(T30,CNreq,CN30,30,B,eff);
       
 %% FUNCTIONS
 
@@ -247,7 +247,7 @@ function D = Downlinked_Data(B,Ptime,eff,t)
     end
 end
 
-function Total_D = Download_60days(T,CNreq,CN,elev,B,eff)
+function [Total_D,Total_Dmed] = Download_60days(T,CNreq,CN,elev,B,eff)
 
     j = 1;
     for i = 1:length(T)-1
@@ -268,7 +268,7 @@ function Total_D = Download_60days(T,CNreq,CN,elev,B,eff)
         Total_D = Total_D+Pass_D;
         clearvars Pass Pass_pos Pass_time Pass_D
     end
-
+    Total_Dmed = Total_D/size(PosF,2);
 end
 
 function CN = CN_60Days(D,lambda,EIRP,G_T,L_X,k,B)
