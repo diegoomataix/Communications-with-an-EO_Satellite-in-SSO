@@ -5,7 +5,7 @@ load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
 d10 = 1e3*R_Elevation10_10s(28:92,2);     % [m]
 d20 = 1e3*R_Elevation20_10s(56:98,2);      % [m]
 d30 = 1e3*R_Elevation30_10s(65:96,2);      % [m]
-d10(1) = d10(end); 
+ d10(1) = d10(end); 
 t10 = R_Elevation10_10s(28:92,1)-R_Elevation10_10s(28,1);      % [s]
 t20 = R_Elevation20_10s(56:98,1)-R_Elevation20_10s(56,1);      % [s]
 t30 = R_Elevation30_10s(65:96,1)-R_Elevation30_10s(65,1);      % [s]
