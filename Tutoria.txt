@@ -1,0 +1,47 @@
+buscar frecuancia exacta que usa si se puede
+
+--TASK 2/3:
+
+SIMETRIA CURVA CN - -> AUMENTAR MUESTREO DE DATOS STK (1-2s)
+
+CN A ELEV 30 --> PASA PORQUE TABLA NO REQUIERE MÁS DE 16 Y PICO / LO SUYO SERIA TENER UNA TABLA DE MODCOD MAS DETALLADA
+
+PASARLE EL CODIGO COMO FUNCION QUE PUEDA EJECUTAR RAPIDAMENTE --> CORRER EL CASO SOLO CON EL CASO DE ELEV 30
+
+PASES EN LOS CUALES VARIA CN POCO --> PORQUE EL PASE PASA EN EL HORIZONTE <-- TIENE QUE VER CON LA DURACIÓN DEL ACCESO
+
+
+--TASAK 6:
+
+PONER LOS DOS CASOS DE PESO DE IMAGEN
+
+EXPLICAR A QUE CORRESPONDE EL RATIO DE COMPRESIÓN
+
+ENCODER: EN IMAGENES ES LOSSY
+	--> PONER PARRAFO DICIENDO QUE PUEDE SER LOSSY, TENGO QUE TENER EN CUENTA RESOLUCIÓN, MIRAR QUE COMPRESORES SE UTILIZAN 
+	    EN DIFERENTES MISIONES
+	--> CALIDAD QUE PIERDES vs DATOS QUE TIENES QUE BAJAR
+
+	note! por el hecho de comprimir es lossy (imposible recuperar imagen al 100%) / en lossless no estás procesando anda
+
+--TASK 7:
+
+como dices al satélite como tiene que cambiar de MODCOD, lo hace estacion de tierra o el satelite conoce el momento de la orbita
+en la que se toma la foto y hace todo solo
+
+TPC : SISTEMA DE TELEMETRY P CONTROL (NO HACE FALTA 
+
+METER MEMORIA (Y TIPO DE MEMORIA)
+
+Y TIPO DE BUS (422...no me he enterao:( )
+
+--TASK 8:
+
+	- TASA DE COMPRESION
+	- INTERCAMBIAMOS DATOS CON ESTACION DE TIERRA?
+	- METEMOS VARIAS ESTACIONES DE TIERRA?
+	- AUMENTAR NUMERO DE MODCOD  (utilizar modcod por encima de 16dB) <-- necesitas mas potencia con todo lo que conlleva
+	- ELVACIONES MINIMAS + MINIMAS <-- AL REDUCIRSE EMPEORAS LA G/T DE LA ESTACION <-- NECESITAS UNA ANTENA + GRANDE PARA COMPENSAR
+		(NO ES MUY RAZONABLE, TE SOBRAN dBs)
+	- JUGAR CON EL ANCHO DE BANDA (MANTENIENDO EL MODCOD) <-- LA GESTION SE COMPLICA, NECESITAS QUE LOS FILTROS SEAN PROGRAMABLES ( QUE VARIEN ENTRE i.e. 50mb y 600mb) <-- muy complicado
+	- podriamos subir de banda X a Ka <-- tienes  + perdidasm, pones otra antena + otro transmisor <-- lluvia tiene + impacto, + potencia del sat o + ganancia
