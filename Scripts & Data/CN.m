@@ -34,9 +34,23 @@ G_T = G - 10*log10(T);
     CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
     eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
     
+    CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
+    CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
+    CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
+    
     [PosI10,PosF10] = Classify_Pass(T10);
     [PosI20,PosF20] = Classify_Pass(T20);
     [PosI30,PosF30] = Classify_Pass(T30);
+    
+    Pass = 2;       % Choose a single pass
+    
+    [D10_1Pass,D10_1Pass_med] = Download_60days(T10,PosI10(Pass),PosF10(Pass),CNreq,CN10,10,B,eff,"YES");
+    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI30(Pass),PosF20(Pass),CNreq,CN20,20,B,eff,"YES");
+    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI20(Pass),PosF30(Pass),CNreq,CN30,30,B,eff,"YES");
+    
+    plotCN(T10(PosI10(Pass):PosF10(Pass))-T10(PosI10(Pass)),D10(PosI10(Pass):PosF10(Pass)),CN10(PosI10(Pass):PosF10(Pass)),1);
+    plotCN(T20(PosI20(Pass):PosF20(Pass))-T20(PosI20(Pass)),D20(PosI20(Pass):PosF20(Pass)),CN20(PosI20(Pass):PosF20(Pass)),2);
+    plotCN(T30(PosI30(Pass):PosF30(Pass))-T30(PosI30(Pass)),D30(PosI30(Pass):PosF30(Pass)),CN30(PosI30(Pass):PosF30(Pass)),3);
 
 %     pos1 = plotMODCOD(CNreq,C_N_10(1:end),t10,10,"YES");
 %     pos2 = plotMODCOD(CNreq,C_N_20(1:end),t20,20,"YES");
@@ -51,15 +65,15 @@ G_T = G - 10*log10(T);
 %% TASK 5
     
     % 1 pass
-%     D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end)-t10(1));
+%     D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end)-t10(1));    %MIRARLO
 %     D20_1Pass = Downlinked_Data(B,Ptime20,eff,t20(end)-t20(1));
 %     D30_1Pass = Downlinked_Data(B,Ptime30,eff,t30(end)-t30(1));
     
     % 60 days 
-    CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
-    CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
-    CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
-    
+%     CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
+%     CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
+%     CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
+%     
     [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
     [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
     [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
@@ -76,7 +90,6 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
     posb = zeros(size(posi));
     posb(1:30) = posi(1);
     posb(end-30:end) = posi(end);
-    size(posb,2)-30
     
     i = 31;
     while (i < size(posi,2)/2+1)
@@ -138,10 +151,10 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
     if logical == "YES"
         figure()
         hold on
-        plot(t_aux,MODCOD_aux)
+        plot(t_aux-t_aux(1),MODCOD_aux)
         set(gca,'linewidth',0.75)
         set(gca,'fontsize',14)
-        plot(t,CN)
+        plot(t-t(1),CN)
         title(['Elevacion ' num2str(elev) 'º'])
         hold off
     else
@@ -194,15 +207,7 @@ end
 
 function [Total_D,Total_Dmed] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,logical)
 
-%     j = 1;
-%     for i = 1:length(T)-1
-%         if (abs(T(i)-T(i+1)) > 1)      % New pass
-%             PosF(j) = i; PosI(j+1) = i+1;
-%             j = j+1;
-%         else
-%         end
-%     end
-%     PosI(1) = 1; PosF(end+1) = length(T);
+    [PosI,PosF] = posd(PosI,PosF);
     
     Total_D = 0;
     for i = 1:length(PosF)
@@ -213,7 +218,7 @@ function [Total_D,Total_Dmed] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,
         Total_D = Total_D+Pass_D;
         clearvars Pass Pass_pos Pass_time Pass_D
     end
-    Total_Dmed = Total_D/size(PosF,2);
+        Total_Dmed = Total_D/size(PosF,2);
 end
 
 function CN = CN_60Days(D,lambda,EIRP,G_T,L_X,k,B)
@@ -233,4 +238,17 @@ function [PosI,PosF] = Classify_Pass(T)
         end
     end
     PosI(1) = 1; PosF(end+1) = length(T);
+end
+
+function [posi,posf] = posd(pi,pf)
+
+    j = 1;
+    for i = 1:length(pi)
+        if abs(pi(i)-pf(i)) > 30
+            posi(j) = pi(i);
+            posf(j) = pf(i);
+            j = j+1;
+        else
+        end
+    end
 end
