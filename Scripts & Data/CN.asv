@@ -26,8 +26,19 @@ G = 10*log10(eta*(pi*D/lambda)^2); % [dBi]
 % G/T
 T = T_ant + T_0*(10^(NF/10)-1);    % [K]
 G_T = G - 10*log10(T);
+Lfs10 = 20*log10(4*pi*d10/lambda);
+Lfs20 = 20*log10(4*pi*d20/lambda);
+Lfs30 = 20*log10(4*pi*d30/lambda);
 
-%plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
+% t10 = linspace(0,t_Elevation10(1,1),size(Lfs10,1));
+% t20 = linspace(0,t_Elevation20(1,1),size(Lfs20,1));
+% t30 = linspace(0,t_Elevation30(1,1),size(Lfs30,1));
+
+C_N_10 = EIRP + G_T - Lfs10 - L_X - k -10*log10(B);
+C_N_20 = EIRP + G_T - Lfs20 - L_X - k -10*log10(B);
+C_N_30 = EIRP + G_T - Lfs30 - L_X - k -10*log10(B);
+
+plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
 
 %% TASK 4
 
@@ -76,7 +87,6 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
     posb = zeros(size(posi));
     posb(1:30) = posi(1);
     posb(end-30:end) = posi(end);
-    size(posb,2)-30
     
     i = 31;
     while (i < size(posi,2)/2+1)
@@ -142,7 +152,7 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
         set(gca,'linewidth',0.75)
         set(gca,'fontsize',14)
         plot(t,CN)
-        title(['Elevacion ' num2str(elev) 'º'])
+        title(['Elevación ' num2str(elev) 'º'])
         hold off
     else
     end
