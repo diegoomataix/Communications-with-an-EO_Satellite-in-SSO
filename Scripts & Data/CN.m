@@ -6,8 +6,8 @@ load('Elevation10_1s'); load('Elevation20_1s'); load('Elevation30_1s')
 T10 = Elevation10_1s(:,1); T20 = Elevation20_1s(:,1); T30 = Elevation30_1s(:,1);
 D10 = Elevation10_1s(:,2)*1000; D20 = Elevation20_1s(:,2)*1000; D30 = Elevation30_1s(:,2)*1000;
 
-%% Compute/Read Access Time Data
-load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
+% %% Compute/Read Access Time Data
+% load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
 %% DATOS
 EIRP = 22;          % [dBW]
 D = 5;              % Diametro antena [m]
@@ -42,41 +42,21 @@ G_T = G - 10*log10(T);
     [PosI20,PosF20] = Classify_Pass(T20);
     [PosI30,PosF30] = Classify_Pass(T30);
     
-    Pass = 4;       % Choose a single pass
+    Pass10 = 54; Pass20 = 114; Pass30 = 4;      % Choose a single pass
     
-    [D10_1Pass,D10_1Pass_med] = Download_60days(T10,PosI10(Pass),PosF10(Pass),CNreq,CN10,10,B,eff,"YES");
-    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI20(Pass),PosF20(Pass),CNreq,CN20,20,B,eff,"YES");
-    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI30(Pass),PosF30(Pass),CNreq,CN30,30,B,eff,"YES");
+    [D10_1Pass,D10_1Pass_med] = Download_60days(T10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
+    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
+    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
     
-    plotCN(T10(PosI10(Pass):PosF10(Pass))-T10(PosI10(Pass)),D10(PosI10(Pass):PosF10(Pass)),CN10(PosI10(Pass):PosF10(Pass)),1);
-    plotCN(T20(PosI20(Pass):PosF20(Pass))-T20(PosI20(Pass)),D20(PosI20(Pass):PosF20(Pass)),CN20(PosI20(Pass):PosF20(Pass)),2);
-    plotCN(T30(PosI30(Pass):PosF30(Pass))-T30(PosI30(Pass)),D30(PosI30(Pass):PosF30(Pass)),CN30(PosI30(Pass):PosF30(Pass)),3);
-
-%     pos1 = plotMODCOD(CNreq,C_N_10(1:end),t10,10,"YES");
-%     pos2 = plotMODCOD(CNreq,C_N_20(1:end),t20,20,"YES");
-%     pos3 = plotMODCOD(CNreq,C_N_30(1:end),t30,30,"YES");
-% 
-%     Ptime10 = Access_Time_Percentage(pos1);
-%     Ptime20 = Access_Time_Percentage(pos2);
-%     Ptime30 = Access_Time_Percentage(pos3);
-    
-%[Total_D,Total_Dmed] = Download_60days(T,CNreq,CN,elev,B,eff,logical)
+    plotCN(T10(PosI10(Pass10):PosF10(Pass10))-T10(PosI10(Pass10)),D10(PosI10(Pass10):PosF10(Pass10)),CN10(PosI10(Pass10):PosF10(Pass10)),1);
+    plotCN(T20(PosI20(Pass20):PosF20(Pass20))-T20(PosI20(Pass20)),D20(PosI20(Pass20):PosF20(Pass20)),CN20(PosI20(Pass20):PosF20(Pass20)),2);
+    plotCN(T30(PosI30(Pass30):PosF30(Pass30))-T30(PosI30(Pass30)),D30(PosI30(Pass30):PosF30(Pass30)),CN30(PosI30(Pass30):PosF30(Pass30)),3);
 
 %% TASK 5
     
-    % 1 pass
-%     D10_1Pass = Downlinked_Data(B,Ptime10,eff,t10(end)-t10(1));    %MIRARLO
-%     D20_1Pass = Downlinked_Data(B,Ptime20,eff,t20(end)-t20(1));
-%     D30_1Pass = Downlinked_Data(B,Ptime30,eff,t30(end)-t30(1));
-    
-    % 60 days 
-%     CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
-%     CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
-%     CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
-%     
-%     [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
-%     [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
-%     [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
+    [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
+    [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
+    [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
       
 %% FUNCTIONS
 
@@ -155,7 +135,7 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
         set(gca,'linewidth',0.75)
         set(gca,'fontsize',14)
         plot(t-t(1),CN)
-        title(['Elevacion ' num2str(elev) 'Âº'])
+        title(['Elevacion ' num2str(elev) 'º'])
         hold off
     else
     end
@@ -174,7 +154,7 @@ function plotCN(t,d, C_N, elev)
         yyaxis right
         %ylabel("\it d [m]",0,'HorizontalAlignment','right','Position',[120.4 max(TT)])
         plot(t,d)
-        title(['ElevaciÃ³n ' num2str(elev) 'Âº'])
+        title(['Elevacion ' num2str(elev) 'º'])
     hold off
 end
 
@@ -244,7 +224,7 @@ function [posi,posf] = posd(pi,pf)
 
     j = 1;
     for i = 1:length(pi)
-        if abs(pi(i)-pf(i)) > 30
+        if abs(pi(i)-pf(i)) > 200
             posi(j) = pi(i);
             posf(j) = pf(i);
             j = j+1;
