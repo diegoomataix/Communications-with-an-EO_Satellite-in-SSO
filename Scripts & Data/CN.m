@@ -42,11 +42,11 @@ G_T = G - 10*log10(T);
     [PosI20,PosF20] = Classify_Pass(T20);
     [PosI30,PosF30] = Classify_Pass(T30);
     
-    Pass = 2;       % Choose a single pass
+    Pass = 4;       % Choose a single pass
     
     [D10_1Pass,D10_1Pass_med] = Download_60days(T10,PosI10(Pass),PosF10(Pass),CNreq,CN10,10,B,eff,"YES");
-    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI30(Pass),PosF20(Pass),CNreq,CN20,20,B,eff,"YES");
-    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI20(Pass),PosF30(Pass),CNreq,CN30,30,B,eff,"YES");
+    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI20(Pass),PosF20(Pass),CNreq,CN20,20,B,eff,"YES");
+    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI30(Pass),PosF30(Pass),CNreq,CN30,30,B,eff,"YES");
     
     plotCN(T10(PosI10(Pass):PosF10(Pass))-T10(PosI10(Pass)),D10(PosI10(Pass):PosF10(Pass)),CN10(PosI10(Pass):PosF10(Pass)),1);
     plotCN(T20(PosI20(Pass):PosF20(Pass))-T20(PosI20(Pass)),D20(PosI20(Pass):PosF20(Pass)),CN20(PosI20(Pass):PosF20(Pass)),2);
@@ -74,14 +74,14 @@ G_T = G - 10*log10(T);
 %     CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
 %     CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
 %     
-    [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
-    [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
-    [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
+%     [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
+%     [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
+%     [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
       
 %% FUNCTIONS
 
 function posi = plotMODCOD(CNreq,CN,t,elev,logical)
-
+    
     for i = 1:size(CN,1)
         pos = find(CNreq <= CN(i));
         posi(i) = pos(1);
@@ -208,11 +208,11 @@ end
 function [Total_D,Total_Dmed] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,logical)
 
     [PosI,PosF] = posd(PosI,PosF);
-    
+
     Total_D = 0;
     for i = 1:length(PosF)
         Pass = T(PosI(i):PosF(i));
-        Pass_pos = plotMODCOD(CNreq,CN(PosI(i):PosF(i)),Pass,elev,logical);     % Cambiar los 10
+        Pass_pos = plotMODCOD(CNreq,CN(PosI(i):PosF(i)),Pass,elev,logical);     
         Pass_time = Access_Time_Percentage(Pass_pos);
         Pass_D = Downlinked_Data(B,Pass_time,eff,Pass(end)-Pass(1));
         Total_D = Total_D+Pass_D;
