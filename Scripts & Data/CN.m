@@ -44,20 +44,20 @@ G_T = G - 10*log10(T);
     
     Pass10 = 54; Pass20 = 114; Pass30 = 4;      % Choose a single pass
     
-    [D10_1Pass,D10_1Pass_med] = Download_60days(T10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
-    [D20_1Pass,D20_1Pass_med] = Download_60days(T20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
-    [D30_1Pass,D30_1Pass_med] = Download_60days(T30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
+    [D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Download_60days(T10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
+    [D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Download_60days(T20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
+    [D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Download_60days(T30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
     
-    plotCN(T10(PosI10(Pass10):PosF10(Pass10))-T10(PosI10(Pass10)),D10(PosI10(Pass10):PosF10(Pass10)),CN10(PosI10(Pass10):PosF10(Pass10)),1);
-    plotCN(T20(PosI20(Pass20):PosF20(Pass20))-T20(PosI20(Pass20)),D20(PosI20(Pass20):PosF20(Pass20)),CN20(PosI20(Pass20):PosF20(Pass20)),2);
-    plotCN(T30(PosI30(Pass30):PosF30(Pass30))-T30(PosI30(Pass30)),D30(PosI30(Pass30):PosF30(Pass30)),CN30(PosI30(Pass30):PosF30(Pass30)),3);
+    plotCN(T10(PosI10(Pass10):PosF10(Pass10))-T10(PosI10(Pass10)),D10(PosI10(Pass10):PosF10(Pass10)),CN10(PosI10(Pass10):PosF10(Pass10)),10);
+    plotCN(T20(PosI20(Pass20):PosF20(Pass20))-T20(PosI20(Pass20)),D20(PosI20(Pass20):PosF20(Pass20)),CN20(PosI20(Pass20):PosF20(Pass20)),20);
+    plotCN(T30(PosI30(Pass30):PosF30(Pass30))-T30(PosI30(Pass30)),D30(PosI30(Pass30):PosF30(Pass30)),CN30(PosI30(Pass30):PosF30(Pass30)),30);
 
 %% TASK 5
     
-    [D10_60Days,D10_60Days_med] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
-    [D20_60Days,D20_60Days_med] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
-    [D30_60Days,D30_60Days_med] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
-      
+%     [D10_60Days,D10_60Days_med,trash(:,:)] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
+%     [D20_60Days,D20_60Days_med,trash(:,:)] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
+%     [D30_60Days,D30_60Days_med,trash(:,:)] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
+%       
 %% FUNCTIONS
 
 function posi = plotMODCOD(CNreq,CN,t,elev,logical)
@@ -131,11 +131,15 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
     if logical == "YES"
         figure()
         hold on
-        plot(t_aux-t_aux(1),MODCOD_aux)
-        set(gca,'linewidth',0.75)
-        set(gca,'fontsize',14)
-        plot(t-t(1),CN)
-        title(['Elevacion ' num2str(elev) 'º'])
+            box on
+            plot(t_aux-t_aux(1),MODCOD_aux,"blue")
+            set(gca,'linewidth',0.75)
+            set(gca,'fontsize',14)
+            plot(t-t(1),CN,"black")
+            xlim([0 t(end)-t(1)])
+            xlabel('\it t \rm [s]')
+            ylabel("\it C/N \rm[dB]","rotation",0,'HorizontalAlignment','right')
+            title(['Elevation ' num2str(elev) 'º'])
         hold off
     else
     end
@@ -145,16 +149,17 @@ function plotCN(t,d, C_N, elev)
     figure()
     hold on
         box on
-        % xlabel('\it t \rm [s]')
+        xlabel('\it t \rm [s]')
+        xlim([0 t(end)])
         set(gca,'linewidth',0.75)
         set(gca,'fontsize',14)
         yyaxis left
-        %ylabel("\it ","rotation",0,'HorizontalAlignment','right','Position',[-0.04 max(G)])
+        ylabel("\it C/N \rm[dB]","rotation",0,'HorizontalAlignment','right')
         plot(t,C_N)
         yyaxis right
-        %ylabel("\it d [m]",0,'HorizontalAlignment','right','Position',[120.4 max(TT)])
+        ylabel("\it d \rm[m]","rotation",0,'HorizontalAlignment','right')
         plot(t,d)
-        title(['Elevacion ' num2str(elev) 'º'])
+        title(['Elevation ' num2str(elev) 'º'])
     hold off
 end
 
@@ -185,7 +190,7 @@ function D = Downlinked_Data(B,Ptime,eff,t)
     end
 end
 
-function [Total_D,Total_Dmed] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,logical)
+function [Total_D,Total_Dmed,Pass_time] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,logical)
 
     [PosI,PosF] = posd(PosI,PosF);
 
@@ -196,9 +201,13 @@ function [Total_D,Total_Dmed] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,
         Pass_time = Access_Time_Percentage(Pass_pos);
         Pass_D = Downlinked_Data(B,Pass_time,eff,Pass(end)-Pass(1));
         Total_D = Total_D+Pass_D;
-        clearvars Pass Pass_pos Pass_time Pass_D
+        clearvars Pass Pass_pos Pass_D
     end
         Total_Dmed = Total_D/size(PosF,2);
+    if size(PosF,2) > 1
+        Pass_time = 0;
+    else
+    end
 end
 
 function CN = CN_60Days(D,lambda,EIRP,G_T,L_X,k,B)
