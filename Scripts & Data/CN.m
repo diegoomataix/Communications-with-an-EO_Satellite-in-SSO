@@ -5,7 +5,6 @@ load('Elevation10_10s'); load('Elevation20_10s'); load('Elevation30_10s')
 d10 = 1e3*R_Elevation10_10s(28:92,2);     % [m]
 d20 = 1e3*R_Elevation20_10s(56:98,2);      % [m]
 d30 = 1e3*R_Elevation30_10s(65:96,2);      % [m]
-d10(1) = d10(end); 
 t10 = R_Elevation10_10s(28:92,1)-R_Elevation10_10s(28,1);      % [s]
 t20 = R_Elevation20_10s(56:98,1)-R_Elevation20_10s(56,1);      % [s]
 t30 = R_Elevation30_10s(65:96,1)-R_Elevation30_10s(65,1);      % [s]
@@ -27,7 +26,7 @@ eta = 0.6;          % Efficiency
 k = -228.6;         % [dBW/(K·Hz)]
 T_0 = 290;          % [K]
 c = 2.998e8;        % [ms]
-lambda = (c/8e9);   % [m]
+lambda = (c/7.5e9);   % [m]
 % Antenna gain
 G = 10*log10(eta*(pi*D/lambda)^2); % [dBi]
 % G/T
@@ -86,32 +85,27 @@ function posi = plotMODCOD(CNreq,CN,t,elev,logical)
     end
     
     posb = zeros(size(posi));
-    posb(1) = posi(1); posb(end) = posi(end);
-    posb(2) = posi(1); posb(end-1) = posi(end);
-    posb(3) = posi(1); posb(end-2) = posi(end);
-
-    i = 4;
+    posb(1:30) = posi(1);
+    posb(end-30:end) = posi(end);
+    
+    i = 31;
     while (i < size(posi,2)/2+1)
         if posi(i) == posb(i-1)
             posb(i) = posi(i);
             i = i+1;
         else
-            posb(i) = posi(i);
-            posb(i+1) = posi(i);    
-            posb(i+2) = posi(i);
-            i = i+3;
+            posb(i:i+29) = posi(i);    
+            i = i+30;
         end
     end
-    i = size(posi,2)-3;
+    i = size(posi,2)-30;
     while (i > size(posi,2)/2-1)
         if posi(i) == posb(i+1)
             posb(i) = posi(i);
             i = i-1;
         else
-            posb(i) = posi(i);
-            posb(i-1) = posi(i);    
-            posb(i-2) = posi(i);
-            i = i-3;
+            posb(i-29:i) = posi(i);
+            i = i-30;
         end
     end
     
@@ -181,45 +175,6 @@ function plotCN(t,d, C_N, elev)
     hold off
 end
 
-% function plotMODCOD(CNlink,t,CNreq,elev)
-% cont=0;
-% pos = zeros(length(CNlink),1);
-% 
-% for i = 1:length(CNlink)
-%     for j = 1:length(CNreq)
-%         if CNlink(i) > CNreq(j)
-%         cont = cont+1;
-%         pos(cont) = j;
-%         break
-%         end
-%     end
-% end
-% 
-% pos(1:3) = max(pos(1:3));
-% for i = 4:length(CNlink)-3
-%     if pos(i) ~= pos(i-1)
-%        pos(i:i+3) = max(pos(i:i+3));
-%     end
-% end
-% 
-% pos(length(CNlink)-2:length(CNlink)) = max(pos(length(CNlink)-2:length(CNlink)));
-% 
-% MODCOD = zeros(length(pos),1);
-% 
-% for i = 1:length(pos)
-%     MODCOD(i) = CNreq(pos(i))';
-% end
-% 
-% figure()
-% hold on
-% stairs(t,MODCOD)
-% set(gca,'linewidth',0.75)
-% set(gca,'fontsize',14)
-% plot(t,CNlink)
-% title(['Elevación ' num2str(elev) 'º'])
-% hold off
-% end
-
 function Output = Access_Time_Percentage(pos)
 
     pos =  sort(pos);
@@ -251,7 +206,7 @@ function [Total_D,Total_Dmed] = Download_60days(T,CNreq,CN,elev,B,eff)
 
     j = 1;
     for i = 1:length(T)-1
-        if (abs(T(i)-T(i+1)) > 10)      % New pass
+        if (abs(T(i)-T(i+1)) > 1)      % New pass
             PosF(j) = i; PosI(j+1) = i+1;
             j = j+1;
         else
