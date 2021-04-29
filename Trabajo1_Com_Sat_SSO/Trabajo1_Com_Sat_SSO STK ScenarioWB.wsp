@@ -2,7 +2,7 @@
 WorkbookVersion=9.0
 Title=Trabajo1_Com_Sat_SSO
 Description=
-ApplicationVersion=12.0.1
+ApplicationVersion=12.1.0
 Scenario=YES
 ActiveMDIState=FALSE
 [WorkState_v1_2]
@@ -11,21 +11,24 @@ ptn_Child1=Frames
 ptn_Child1=MainFrame
 ptn_Child2=ChildFrames
 [WorkState_v1_2.Frames.MainFrame]
-WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAAADIPPPPAADIPPPPPPPPPPPPPPPPPPPPHKOPPPPPIOAAAAAAHPDAAAAALBEAAAAA
-Title=Trabajo1_Com_Sat_SSO - STK 12 - Access
+WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAPPPPPPPPPPPPPPPPDOIPPPPPGLAAAAAABDPPPPPPDBGAAAAA
+Title=Trabajo1_Com_Sat_SSO - STK 12 - 3D Attitude Graphics 2 - BestSAT
 [WorkState_v1_2.Frames.ChildFrames]
 ptn_Child1=Document-0
 ptn_Child2=Document-1
 ptn_Child3=Document-2
 ptn_Child4=Document-3
 ptn_Child5=Document-4
+ptn_Child6=Document-5
+ptn_Child7=Document-6
+ptn_Child8=Document-7
 [WorkState_v1_2.Frames.ChildFrames.Document-0]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0]
-DocPathName=C:\Users\Andrea\Desktop\AgUi3DGfxView12.AgUiPi3DGfxView.1
+DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUi3DGfxView12.AgUiPi3DGfxView.1
 DocumentString=AgUi3DGfxView.AgUiPi3DGfxView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPAAAAAAAAAAAAAAAAEBDAAAAAHHCAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPAAAAAAAAAAAAAAAAEBDAAAAAEIDAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ptn_Child1=AGI Custom Node Data
@@ -35,11 +38,11 @@ SceneType=1
 [WorkState_v1_2.Frames.ChildFrames.Document-1]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0]
-DocPathName=C:\Users\Andrea\Desktop\AgUi3DGfxView12.AgUiPi3DGfxView.1
+DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUi3DGfxView12.AgUiPi3DGfxView.1
 DocumentString=AgUi3DGfxView.AgUiPi3DGfxView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPEBDAAAAAAAAAAAAAICGAAAAAHHCAAAAA
-IsActiveChildFrame=False
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPFPPPPPPPINPPPPPPEBDAAAAAAAAAAAAAJAIAAAAAHKDAAAAA
+IsActiveChildFrame=True
 IsFrameVisible=True
 ptn_Child1=AGI Custom Node Data
 [WorkState_v1_2.Frames.ChildFrames.Document-1.ViewFrame-0.AGI Custom Node Data]
@@ -48,26 +51,26 @@ SceneType=8
 [WorkState_v1_2.Frames.ChildFrames.Document-2]
 ptn_Child1=ViewFrame-0
 [WorkState_v1_2.Frames.ChildFrames.Document-2.ViewFrame-0]
-DocPathName=C:\Users\Andrea\Desktop\AgUiAttrBrowser12.AgUiPiAttrBrowser.1
+DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUiAttrBrowser12.AgUiPiAttrBrowser.1
 DocumentString=AgUiAttrBrowser.AgUiPiAttrBrowser.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAHEBAAAAAEMCAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAHEBAAAAANKDAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63000
 ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-3]
+[WorkState_v1_2.Frames.ChildFrames.Document-5]
 ptn_Child1=ViewFrame-0
-[WorkState_v1_2.Frames.ChildFrames.Document-3.ViewFrame-0]
-DocPathName=C:\Users\Andrea\Desktop\AgUiTimelineView12.AgUiPiTimelineView.1
+[WorkState_v1_2.Frames.ChildFrames.Document-5.ViewFrame-0]
+DocPathName=C:\Users\diego\Dropbox\Academic\MEng Space Systems\2. Com - Comunicaciones\Trabajo1_Com\Scripts & Data\AgUiTimelineView12.AgUiPiTimelineView.1
 DocumentString=AgUiTimelineView.AgUiPiTimelineView.1
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAIHAAAAAOJAAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAAGJAAAAAIJAAAAAA
 IsActiveChildFrame=False
 IsFrameVisible=True
 ProfUISBarID=63001
 ptn_Child1=AGI Custom Node Data
-[WorkState_v1_2.Frames.ChildFrames.Document-3.ViewFrame-0.AGI Custom Node Data]
+[WorkState_v1_2.Frames.ChildFrames.Document-5.ViewFrame-0.AGI Custom Node Data]
 ComponentWellWidth=200.000000000000
 CurrentContentView=Scenario Availability
 CurrentTimeView=Scenario Analysis Period

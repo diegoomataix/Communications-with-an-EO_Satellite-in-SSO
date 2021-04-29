@@ -1,5 +1,5 @@
 stk.v.12.0
-WrittenBy    STK_v12.0.1
+WrittenBy    STK_v12.1.0
 
 BEGIN Sensor
 
@@ -9,7 +9,7 @@ BEGIN Sensor
 
         BEGIN SimpleCone
 
-            ConeAngle		  5.9999999999999993e+01
+            ConeAngle		  8.5000000000000000e+01
             AngularPatternResolution		  4.0000000000000000e+00
 
         END SimpleCone
@@ -88,32 +88,6 @@ BEGIN Sensor
         END Refraction
 
         BEGIN Crdn
-            BEGIN VECTOR
-                Type		 VECTOR_TOVECTOR
-                Name		 BestSAT
-                Description		 Displacement vector to BestSAT
-                Origin		
-                BEGIN POINT
-                    Type		 POINT_LINKTO
-                    Name		 Center
-                END POINT
-                Destination		
-                BEGIN POINT
-                    Type		 POINT_LINKTO
-                    Name		 Center
-                    RelativePath		 Satellite/BestSAT
-                END POINT
-                LTDRefSystem		
-                BEGIN SYSTEM
-                    Type		 SYSTEM_LINKTO
-                    Name		 BarycenterICRF
-                    AbsolutePath		 CentralBody/Sun
-                END SYSTEM
-                Apparent		 No
-                TimeConvergence		  1.0000000000000000e-03
-                TimeSense		 Receive
-                IgnoreAberration		 No
-            END VECTOR
         END Crdn
 
         BEGIN Graphics

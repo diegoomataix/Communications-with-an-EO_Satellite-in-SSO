@@ -1,5 +1,5 @@
 stk.v.12.0
-WrittenBy    STK_v12.0.1
+WrittenBy    STK_v12.1.0
 BEGIN Scenario
     Name		 Trabajo1_Com_Sat_SSO
 
@@ -88,7 +88,7 @@ BEGIN Scenario
     END StarCollection
 
     BEGIN ScenarioLicenses
-        Module		 STKv12.0
+        Module		 STKv12.1
     END ScenarioLicenses
 
     BEGIN QuickReports
@@ -122,6 +122,48 @@ BEGIN Scenario
             WindowRectTop		 235
             WindowRectRight		 1466
             WindowRectBottom		 801
+        END Report
+
+        BEGIN Report
+            Name		 RangeDurationData
+            Type		 Report
+            BaseDir		 User
+            Style		 RangeDurationData
+            AGIViewer		 Yes
+            Instance		 Place/Cebreros_Station/Sensor/Sensor2
+            BEGIN InstanceList
+                Instance		 Satellite/BestSAT
+            END InstanceList
+            BEGIN TimeData
+                BEGIN Section
+                    SectionNumber		 1
+                    SectionType		 2
+                    ShowIntervals		 No
+                    BEGIN IntervalList
+
+                        DateUnitAbrv		 UTCG
+
+                        BEGIN Intervals
+
+"1 May 2021 10:00:00.000000000" "30 Jun 2021 10:00:00.000000000"
+                        END Intervals
+
+                    END IntervalList
+
+                    TimeType		 Interval
+                    SamplingType		 Default
+                    Step		 1
+                    TimeBound		 0
+                END Section
+            END TimeData
+            DisplayOnLoad		 Yes
+            FrameType		 0
+            DockCircleID		 0
+            DockID		 0
+            WindowRectLeft		 -1865
+            WindowRectTop		 1026
+            WindowRectRight		 -1666
+            WindowRectBottom		 1060
         END Report
     END QuickReports
 
@@ -309,12 +351,7 @@ BEGIN Scenario
                 BEGIN Favorite
                     Type		 Report
                     BaseDir		 User
-                    Style		 Access Duration
-                END Favorite
-                BEGIN Favorite
-                    Type		 Report
-                    BaseDir		 Install
-                    Style		 Access Detailed
+                    Style		 RangeDurationData
                 END Favorite
                 BEGIN Favorite
                     Type		 Graph
@@ -323,8 +360,8 @@ BEGIN Scenario
                 END Favorite
                 BEGIN Favorite
                     Type		 Report
-                    BaseDir		 User
-                    Style		 Range
+                    BaseDir		 Install
+                    Style		 Access Detailed
                 END Favorite
             END Class
         END ReportFavorites
@@ -542,200 +579,452 @@ BEGIN Scenario
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "CloudFogModel">
-                <VAR name = "ITU-R_P840-7">
-                    <SCOPE Class = "CloudFogLossModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.0 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "ITU-R_P840-7">
+                            <SCOPE Class = "CloudFogLossModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.0 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{993C93D2-E138-462D-827F-5427ABF8A982}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{E7BA4392-37BE-4446-A5C7-6068165B166A}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;ITU-R_P840-7&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;ITU-R P840-7&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;ITU-R P840-7&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;ITU-R P840-7&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "LiquidWaterDensityValueChoice">
+                                    <STRING>&quot;Liquid Water Content Density Value&quot;</STRING>
+                                </VAR>
+                                <VAR name = "CloudCeiling">
+                                    <QUANTITY Dimension = "DistanceUnit" Unit = "m">
+                                        <REAL>3000</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "CloudLayerThickness">
+                                    <QUANTITY Dimension = "DistanceUnit" Unit = "m">
+                                        <REAL>500</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "CloudTemp">
+                                    <QUANTITY Dimension = "Temperature" Unit = "K">
+                                        <REAL>273.15</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "CloudLiqWaterDensity">
+                                    <QUANTITY Dimension = "SmallDensity" Unit = "kg*m^-3">
+                                        <REAL>0.0001</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "AnnualAveragePercentValue">
+                                    <QUANTITY Dimension = "Percent" Unit = "unitValue">
+                                        <REAL>0.01</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "MonthlyAveragePercentValue">
+                                    <QUANTITY Dimension = "Percent" Unit = "unitValue">
+                                        <REAL>0.01</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "LiqWaterAverageDataMonth">
+                                    <INT>1</INT>
+                                </VAR>
+                                <VAR name = "UseRainHeightAsCloudThickness">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;ITU-R_P840-7&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;ITU-R P840-7&quot;</STRING>
-                        </VAR>
-                        <VAR name = "LiquidWaterDensityValueChoice">
-                            <STRING>&quot;Liquid Water Content Density Value&quot;</STRING>
-                        </VAR>
-                        <VAR name = "CloudCeiling">
-                            <QUANTITY Dimension = "DistanceUnit" Unit = "m">
-                                <REAL>3000</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "CloudLayerThickness">
-                            <QUANTITY Dimension = "DistanceUnit" Unit = "m">
-                                <REAL>500</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "CloudTemp">
-                            <QUANTITY Dimension = "Temperature" Unit = "K">
-                                <REAL>273.15</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "CloudLiqWaterDensity">
-                            <QUANTITY Dimension = "SmallDensity" Unit = "kg*m^-3">
-                                <REAL>0.0001</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "AnnualAveragePercentValue">
-                            <QUANTITY Dimension = "Percent" Unit = "unitValue">
-                                <REAL>0.01</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "MonthlyAveragePercentValue">
-                            <QUANTITY Dimension = "Percent" Unit = "unitValue">
-                                <REAL>0.01</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "LiqWaterAverageDataMonth">
-                            <INT>1</INT>
-                        </VAR>
-                        <VAR name = "UseRainHeightAsCloudThickness">
-                            <BOOL>false</BOOL>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseTropoScintModel">
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "TropoScintModel">
-                <VAR name = "ITU-R_P618-12">
-                    <SCOPE Class = "TropoScintLossModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.0 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "ITU-R_P618-12">
+                            <SCOPE Class = "TropoScintLossModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.0 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{B009C019-6230-4EEE-9C4F-79246B7ED057}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{BC27045B-5A54-458E-BF17-702BCFE40CA8}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;ITU-R_P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;ITU-R P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;ITU-R P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;ITU-R P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "FadeDepthAverageTimeChoice">
+                                    <STRING>&quot;Fade depth for the average year&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ComputeDeepFade">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "FadeOutage">
+                                    <QUANTITY Dimension = "Percent" Unit = "unitValue">
+                                        <REAL>0.001</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "PercentTimeRefracGrad">
+                                    <QUANTITY Dimension = "Percent" Unit = "unitValue">
+                                        <REAL>0.1</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "SurfaceTemperature">
+                                    <QUANTITY Dimension = "Temperature" Unit = "K">
+                                        <REAL>273.15</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;ITU-R_P618-12&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;ITU-R P618-12&quot;</STRING>
-                        </VAR>
-                        <VAR name = "FadeDepthAverageTimeChoice">
-                            <STRING>&quot;Fade depth for the average year&quot;</STRING>
-                        </VAR>
-                        <VAR name = "ComputeDeepFade">
-                            <BOOL>false</BOOL>
-                        </VAR>
-                        <VAR name = "FadeOutage">
-                            <QUANTITY Dimension = "Percent" Unit = "unitValue">
-                                <REAL>0.001</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "PercentTimeRefracGrad">
-                            <QUANTITY Dimension = "Percent" Unit = "unitValue">
-                                <REAL>0.1</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "SurfaceTemperature">
-                            <QUANTITY Dimension = "Temperature" Unit = "K">
-                                <REAL>273.15</REAL>
-                            </QUANTITY>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseIonoFadingModel">
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "IonoFadingModel">
-                <VAR name = "ITU-R_P531-13">
-                    <SCOPE Class = "IonoFadingLossModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.0 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "ITU-R_P531-13">
+                            <SCOPE Class = "IonoFadingLossModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.0 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{C20D218B-BEFD-49A1-8D83-A954195CD620}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{1699891E-9828-41C7-ADD4-4BE20EFC34A8}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;ITU-R_P531-13&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;ITU-R P531-13&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;ITU-R P531-13&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;ITU-R P531-13&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UseAlternateAPFile">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "AlternateAPDataFile">
+                                    <STRING>
+                                        <PROP name = "FullName">
+                                            <STRING>&quot;&quot;</STRING>
+                                        </PROP>&quot;&quot;</STRING>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;ITU-R_P531-13&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;ITU-R P531-13&quot;</STRING>
-                        </VAR>
-                        <VAR name = "UseAlternateAPFile">
-                            <BOOL>false</BOOL>
-                        </VAR>
-                        <VAR name = "AlternateAPDataFile">
-                            <STRING>
-                                <PROP name = "FullName">
-                                    <STRING>&quot;&quot;</STRING>
-                                </PROP>&quot;&quot;</STRING>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseRainModel">
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "RainModel">
-                <VAR name = "ITU-R_P618-12">
-                    <SCOPE Class = "RainLossModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.0 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "ITU-R_P618-12">
+                            <SCOPE Class = "RainLossModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.0 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{BE3969D6-91AA-42DA-8765-C9D13C763A63}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{1113D770-D1E5-4DEF-99A3-6B3F4D5CE16A}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;ITU-R_P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;ITU-R P618-12 rain model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;ITU-R P618-12&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;ITU-R P618-12 rain model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "SurfaceTemperature">
+                                    <QUANTITY Dimension = "Temperature" Unit = "K">
+                                        <REAL>273.15</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "EnableDepolarizationLoss">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;ITU-R_P618-12&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;ITU-R P618-12&quot;</STRING>
-                        </VAR>
-                        <VAR name = "SurfaceTemperature">
-                            <QUANTITY Dimension = "Temperature" Unit = "K">
-                                <REAL>273.15</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "EnableDepolarizationLoss">
-                            <BOOL>false</BOOL>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseAtmosAbsorptionModel">
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "AtmosAbsorptionModel">
-                <VAR name = "ITU-R_P676-9">
-                    <SCOPE Class = "AtmosphericAbsorptionModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.1 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "ITU-R_P676-9">
+                            <SCOPE Class = "AtmosphericAbsorptionModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.1 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{7A48BA25-6B3C-449F-9942-2066C467F4FE}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{5DBDF434-D4CA-44F6-8097-A6EBF681200D}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;ITU-R_P676-9&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;ITU-R P676-9 gaseous absorption model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;ITU-R P676-9&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;ITU-R P676-9 gaseous absorption model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UseApproxMethod">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "UseSeasonalRegional">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;ITU-R_P676-9&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;ITU-R P676-9&quot;</STRING>
-                        </VAR>
-                        <VAR name = "UseApproxMethod">
-                            <BOOL>true</BOOL>
-                        </VAR>
-                        <VAR name = "UseSeasonalRegional">
-                            <BOOL>true</BOOL>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseUrbanTerresPropLossModel">
                 <BOOL>false</BOOL>
             </VAR>
             <VAR name = "UrbanTerresPropLossModel">
-                <VAR name = "Two_Ray">
-                    <SCOPE Class = "UrbanTerrestrialPropagationLossModel">
-                        <VAR name = "Version">
-                            <STRING>&quot;1.0.0 a&quot;</STRING>
+                <SCOPE Class = "LinkEmbedControl">
+                    <VAR name = "ReferenceType">
+                        <STRING>&quot;Unlinked&quot;</STRING>
+                    </VAR>
+                    <VAR name = "Component">
+                        <VAR name = "Two_Ray">
+                            <SCOPE Class = "UrbanTerrestrialPropagationLossModel">
+                                <VAR name = "Version">
+                                    <STRING>&quot;1.0.0 a&quot;</STRING>
+                                </VAR>
+                                <VAR name = "IdentifierInformation">
+                                    <SCOPE>
+                                        <VAR name = "Identifier">
+                                            <STRING>&quot;{A1EBD19E-3750-485D-B4D0-4678D0D2F2DB}&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "Version">
+                                            <STRING>&quot;1&quot;</STRING>
+                                        </VAR>
+                                        <VAR name = "SourceIdentifierInformation">
+                                            <SCOPE>
+                                                <VAR name = "Identifier">
+                                                    <STRING>&quot;{60FA4C9B-5D74-4743-A449-66CEB6DFC97B}&quot;</STRING>
+                                                </VAR>
+                                                <VAR name = "Version">
+                                                    <STRING>&quot;1&quot;</STRING>
+                                                </VAR>
+                                            </SCOPE>
+                                        </VAR>
+                                    </SCOPE>
+                                </VAR>
+                                <VAR name = "ComponentName">
+                                    <STRING>&quot;Two_Ray&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Description">
+                                    <STRING>&quot;Two Ray (Fourth Power Law) atmospheric absorption model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "Type">
+                                    <STRING>&quot;Two Ray&quot;</STRING>
+                                </VAR>
+                                <VAR name = "UserComment">
+                                    <STRING>&quot;Two Ray (Fourth Power Law) atmospheric absorption model&quot;</STRING>
+                                </VAR>
+                                <VAR name = "ReadOnly">
+                                    <BOOL>false</BOOL>
+                                </VAR>
+                                <VAR name = "Clonable">
+                                    <BOOL>true</BOOL>
+                                </VAR>
+                                <VAR name = "Category">
+                                    <STRING>&quot;@Top&quot;</STRING>
+                                </VAR>
+                                <VAR name = "SurfaceTemperature">
+                                    <QUANTITY Dimension = "Temperature" Unit = "K">
+                                        <REAL>273.15</REAL>
+                                    </QUANTITY>
+                                </VAR>
+                                <VAR name = "LossFactor">
+                                    <REAL>1</REAL>
+                                </VAR>
+                            </SCOPE>
                         </VAR>
-                        <VAR name = "ComponentName">
-                            <STRING>&quot;Two_Ray&quot;</STRING>
-                        </VAR>
-                        <VAR name = "Type">
-                            <STRING>&quot;Two Ray&quot;</STRING>
-                        </VAR>
-                        <VAR name = "SurfaceTemperature">
-                            <QUANTITY Dimension = "Temperature" Unit = "K">
-                                <REAL>273.15</REAL>
-                            </QUANTITY>
-                        </VAR>
-                        <VAR name = "LossFactor">
-                            <REAL>1</REAL>
-                        </VAR>
-                    </SCOPE>
-                </VAR>
+                    </VAR>
+                </SCOPE>
             </VAR>
             <VAR name = "UseCustomA">
                 <BOOL>false</BOOL>
@@ -798,6 +1087,7 @@ BEGIN Scenario
                 XRealTimeMult		 1
                 RealTimeOffset		 0
                 XRtStartFromPause		                Yes		
+                TimeArrayIncrement		 1
 
             END Animation
 
@@ -827,6 +1117,7 @@ BEGIN Scenario
                 AccShowLine		 On
                 AccAnimHigh		 On
                 AccStatHigh		 On
+                AccAnimLineLineWidth		  1.0000000000000000e+00
                 ShowPrintButton		 On
                 ShowAnimButtons		 On
                 ShowAnimModeButtons		 On
