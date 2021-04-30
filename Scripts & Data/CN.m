@@ -1,63 +1,75 @@
 clear all; close all; clc;
+format long;
 
 %% Read Range Data
-load('Elevation10_1s'); load('Elevation20_1s'); load('Elevation30_1s')
+    load('Elevation10_1s'); load('Elevation20_1s'); load('Elevation30_1s')
 
-T10 = Elevation10_1s(:,1); T20 = Elevation20_1s(:,1); T30 = Elevation30_1s(:,1);
-D10 = Elevation10_1s(:,2)*1000; D20 = Elevation20_1s(:,2)*1000; D30 = Elevation30_1s(:,2)*1000;
+    t10 = Elevation10_1s(:,1); t20 = Elevation20_1s(:,1); t30 = Elevation30_1s(:,1);
+    d10 = Elevation10_1s(:,2)*1000; d20 = Elevation20_1s(:,2)*1000; d30 = Elevation30_1s(:,2)*1000;
 
-% %% Compute/Read Access Time Data
-% load('t_Elevation10'); load('t_Elevation20'); load('t_Elevation30')
-%% DATOS
-EIRP = 22;          % [dBW]
-D = 5;              % Diametro antena [m]
-T_ant = 40;         % Temperatura antena [K]
-B = 300e6;          % Bandwidth [Hz]
-NF = 2;             % Receiver noise [dB]
-L_X = 3;            % Losses due to gaseous absorption, rain attenuation... [dB]
-L_Ka = 6;           % Losses due to gaseous absorption, rain attenuation... [dB]
-eta = 0.6;          % Efficiency
-k = -228.6;         % [dBW/(K·Hz)]
-T_0 = 290;          % [K]
-c = 2.998e8;        % [ms]
-lambda = (c/8.09e9);   % [m]
-% Antenna gain
-G = 10*log10(eta*(pi*D/lambda)^2); % [dBi]
-% G/T
-T = T_ant + T_0*(10^(NF/10)-1);    % [K]
-G_T = G - 10*log10(T);
+%% DATA
 
-%plotCN(t10,d10,C_N_10,10); plotCN(t20,d20,C_N_20,20); plotCN(t30,d30,C_N_30,30)
-
-%% TASK 4
-
-    CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
-    eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
+    EIRP = 22;          % [dBW]
+    D = 5;              % Diametro antena [m]
+    T_ant = 40;         % Temperatura antena [K]
+    B = 300e6;          % Bandwidth [Hz]
+    NF = 2;             % Receiver noise [dB]
+    L_X = 3;            % Losses due to gaseous absorption, rain attenuation... [dB]
+    L_Ka = 6;           % Losses due to gaseous absorption, rain attenuation... [dB]
+    eta = 0.6;          % Efficiency
+    k = -228.6;         % [dBW/(K·Hz)]
+    T_0 = 290;          % [K]
+    c = 2.998e8;        % [ms]
+    lambda = (c/8.09e9);   % [m]
     
-    CN10 = CN_60Days(D10,lambda,EIRP,G_T,L_X,k,B);
-    CN20 = CN_60Days(D20,lambda,EIRP,G_T,L_X,k,B);
-    CN30 = CN_60Days(D30,lambda,EIRP,G_T,L_X,k,B);
+%% TASK 3
+
+    % Antenna gain
+    G = 10*log10(eta*(pi*D/lambda)^2); % [dBi]
     
-    [PosI10,PosF10] = Classify_Pass(T10);
-    [PosI20,PosF20] = Classify_Pass(T20);
-    [PosI30,PosF30] = Classify_Pass(T30);
+    % G/T
+    T = T_ant + T_0*(10^(NF/10)-1);    % [K]
+    G_T = G - 10*log10(T);
+    
+    %C/N
+    CN10 = CN_function(d10,lambda,EIRP,G_T,L_X,k,B);
+    CN20 = CN_function(d20,lambda,EIRP,G_T,L_X,k,B);
+    CN30 = CN_function(d30,lambda,EIRP,G_T,L_X,k,B);
+    
+    % Pass classification    
+    [PosI10,PosF10] = Classify_Pass(t10);
+    [PosI20,PosF20] = Classify_Pass(t20);
+    [PosI30,PosF30] = Classify_Pass(t30);
     
     Pass10 = 54; Pass20 = 114; Pass30 = 4;      % Choose a single pass
     
-    [D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Download_60days(T10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
-    [D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Download_60days(T20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
-    [D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Download_60days(T30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
-    
-    plotCN(T10(PosI10(Pass10):PosF10(Pass10))-T10(PosI10(Pass10)),D10(PosI10(Pass10):PosF10(Pass10)),CN10(PosI10(Pass10):PosF10(Pass10)),10);
-    plotCN(T20(PosI20(Pass20):PosF20(Pass20))-T20(PosI20(Pass20)),D20(PosI20(Pass20):PosF20(Pass20)),CN20(PosI20(Pass20):PosF20(Pass20)),20);
-    plotCN(T30(PosI30(Pass30):PosF30(Pass30))-T30(PosI30(Pass30)),D30(PosI30(Pass30):PosF30(Pass30)),CN30(PosI30(Pass30):PosF30(Pass30)),30);
+    % Plots
+    plotCN(t10(PosI10(Pass10):PosF10(Pass10))-t10(PosI10(Pass10)),d10(PosI10(Pass10):PosF10(Pass10)),CN10(PosI10(Pass10):PosF10(Pass10)),10);
+    plotCN(t20(PosI20(Pass20):PosF20(Pass20))-t20(PosI20(Pass20)),d20(PosI20(Pass20):PosF20(Pass20)),CN20(PosI20(Pass20):PosF20(Pass20)),20);
+    plotCN(t30(PosI30(Pass30):PosF30(Pass30))-t30(PosI30(Pass30)),d30(PosI30(Pass30):PosF30(Pass30)),CN30(PosI30(Pass30):PosF30(Pass30)),30);
 
-%% TASK 5
+%% TASK 4
+
+    % Data input
+    CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
+    eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
+ 
+    % Results
+    [D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
+    [D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
+    [D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
     
-%     [D10_60Days,D10_60Days_med,trash(:,:)] = Download_60days(T10,PosI10,PosF10,CNreq,CN10,10,B,eff,"NO");
-%     [D20_60Days,D20_60Days_med,trash(:,:)] = Download_60days(T20,PosI20,PosF20,CNreq,CN20,20,B,eff,"NO");
-%     [D30_60Days,D30_60Days_med,trash(:,:)] = Download_60days(T30,PosI30,PosF30,CNreq,CN30,30,B,eff,"NO");
-%       
+    
+%% TASK 5 
+
+    % Select exclusion time for the passes (200 s and 30 s)
+    exclude = 30;
+    
+    % Results
+    [D10_60Days,D10_60Days_med,trash(:,:)] = Downloaded_Data(t10,PosI10,PosF10,CNreq,CN10,10,B,eff,exclude,"NO");
+    [D20_60Days,D20_60Days_med,trash(:,:)] = Downloaded_Data(t20,PosI20,PosF20,CNreq,CN20,20,B,eff,exclude,"NO");
+    [D30_60Days,D30_60Days_med,trash(:,:)] = Downloaded_Data(t30,PosI30,PosF30,CNreq,CN30,30,B,eff,exclude,"NO");
+      
 %% FUNCTIONS
 
 function posi = plotMODCOD(CNreq,CN,t,elev,logical)
@@ -190,9 +202,9 @@ function D = Downlinked_Data(B,Ptime,eff,t)
     end
 end
 
-function [Total_D,Total_Dmed,Pass_time] = Download_60days(T,PosI,PosF,CNreq,CN,elev,B,eff,logical)
+function [Total_D,Total_Dmed,Pass_time] = Downloaded_Data(T,PosI,PosF,CNreq,CN,elev,B,eff,exclude,logical)
 
-    [PosI,PosF] = posd(PosI,PosF);
+    [PosI,PosF] = pos_delete(PosI,PosF,exclude);
 
     Total_D = 0;
     for i = 1:length(PosF)
@@ -210,7 +222,7 @@ function [Total_D,Total_Dmed,Pass_time] = Download_60days(T,PosI,PosF,CNreq,CN,e
     end
 end
 
-function CN = CN_60Days(D,lambda,EIRP,G_T,L_X,k,B)
+function CN = CN_function(D,lambda,EIRP,G_T,L_X,k,B)
 
     Lfs = 20*log10(4*pi*D/lambda);
     CN = EIRP + G_T - Lfs - L_X - k -10*log10(B);
@@ -229,11 +241,11 @@ function [PosI,PosF] = Classify_Pass(T)
     PosI(1) = 1; PosF(end+1) = length(T);
 end
 
-function [posi,posf] = posd(pi,pf)
+function [posi,posf] = pos_delete(pi,pf,exclude)
 
     j = 1;
     for i = 1:length(pi)
-        if abs(pi(i)-pf(i)) > 200
+        if abs(pi(i)-pf(i)) > exclude      
             posi(j) = pi(i);
             posf(j) = pf(i);
             j = j+1;
