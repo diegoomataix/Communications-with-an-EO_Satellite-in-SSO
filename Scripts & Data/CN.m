@@ -3,8 +3,8 @@
 % Analysis of the amount of data downloaded from an Earth Observation (EO) 
 % satellite using Adaptive Coding and Modulation (ACM).
 % --------------------------------------------------------------------------
-% Realizado por Andrea Bravo Asián, Laura García Moreno, Diego Mataix
-% Caballero, Marina Merchán Bravo, Siro Muela Márquez.
+% Realizado por Andrea Bravo Asian, Laura Garcia Moreno, Diego Mataix
+% Caballero, Marina Merchan Bravo, Siro Muela Marquez.
 %___________________________________________________________________________
 clear all; close all; clc; format long;
 
@@ -73,10 +73,9 @@ CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
 eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 
 % Results
-[DL10_1Pass,DL10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,30,"YES");
-[DL20_1Pass,DL20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,30,"YES");
-[DL30_1Pass,DL30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,30,"YES");
-
+[~,~,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,30,"YES");
+[~,~,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,30,"YES");
+[~,~,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,30,"YES");
 
 %% TASK 5
 
@@ -84,9 +83,11 @@ eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 exclude = 30;
 
 % Results
-[DL10_60Days,DL10_60Days_med,trash(:,:)] = Downloaded_Data(t10,PosI10,PosF10,CNreq,CN10,10,B,eff,exclude,"NO");
-[DL20_60Days,DL20_60Days_med,trash(:,:)] = Downloaded_Data(t20,PosI20,PosF20,CNreq,CN20,20,B,eff,exclude,"NO");
-[DL30_60Days,DL30_60Days_med,trash(:,:)] = Downloaded_Data(t30,PosI30,PosF30,CNreq,CN30,30,B,eff,exclude,"NO");
+[DL10_60Days,DL10_60Days_med,~] = Downloaded_Data(t10,PosI10,PosF10,CNreq,CN10,10,B,eff,exclude,"NO");
+[DL20_60Days,DL20_60Days_med,~] = Downloaded_Data(t20,PosI20,PosF20,CNreq,CN20,20,B,eff,exclude,"NO");
+[DL30_60Days,DL30_60Days_med,~] = Downloaded_Data(t30,PosI30,PosF30,CNreq,CN30,30,B,eff,exclude,"NO");
+
+DL_16APSK = (B*1E-6*av_access_time_e10*60*eff(8))/8;    %Downlinked data for minimun elevation of 10Âº and without ACM
 
 %% FUNCTIONS
 
@@ -169,7 +170,7 @@ if logical == "YES"
     xlim([0 t(end)-t(1)])
     xlabel('\it t \rm [s]')
     ylabel("\it C/N \rm[dB]","rotation",0,'HorizontalAlignment','right')
-    title(['Elevation ' num2str(elev) 'º'])
+    title(['Elevation ' num2str(elev) 'ï¿½'])
     hold off
 else
 end
@@ -189,7 +190,7 @@ plot(t,C_N)
 yyaxis right
 ylabel("\it d \rm[m]","rotation",0,'HorizontalAlignment','right')
 plot(t,d)
-title(['Elevation ' num2str(elev) 'º'])
+title(['Elevation ' num2str(elev) 'ï¿½'])
 hold off
 end
 
