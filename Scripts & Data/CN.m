@@ -55,9 +55,9 @@ format long;
     eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
  
     % Results
-    [D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,"YES");
-    [D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,"YES");
-    [D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,"YES");
+    [D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,30,"YES");
+    [D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,30,"YES");
+    [D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,30,"YES");
     
     
 %% TASK 5 
@@ -249,6 +249,7 @@ function [posi,posf] = pos_delete(pi,pf,exclude)
             posi(j) = pi(i);
             posf(j) = pf(i);
             j = j+1;
+            n = n+1;
         else
         end
     end
