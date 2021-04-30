@@ -83,7 +83,7 @@ hold off
 % 
 
 %% FUNCTIONS
-function plot_histogram()
+function plot_histogram(t_Elevation10,t_Elevation20,t_Elevation30)
 figure()
 hold on
 histogram(t_Elevation10(:,1),'BinWidth',20)
@@ -96,5 +96,4 @@ xlabel('Access time [s]')
 ylabel('Frequency')
 legend('Min. elevation: 10 deg','Min. elevation: 20 deg','Min. elevation: 30 deg','Location','northwest','NumColumns',1)
 hold off
-
 end

@@ -42,6 +42,6 @@ Y TIPO DE BUS (422...no me he enterao:( )
 	- METEMOS VARIAS ESTACIONES DE TIERRA?
 	- AUMENTAR NUMERO DE MODCOD  (utilizar modcod por encima de 16dB) <-- necesitas mas potencia con todo lo que conlleva
 	- ELVACIONES MINIMAS + MINIMAS <-- AL REDUCIRSE EMPEORAS LA G/T DE LA ESTACION <-- NECESITAS UNA ANTENA + GRANDE PARA COMPENSAR
-		(NO ES MUY RAZONABLE, TE SOBRAN dBs)
+		(NO ES MUY RAZONABLE, TE SOBRAN dBs) (min 28.30)
 	- JUGAR CON EL ANCHO DE BANDA (MANTENIENDO EL MODCOD) <-- LA GESTION SE COMPLICA, NECESITAS QUE LOS FILTROS SEAN PROGRAMABLES ( QUE VARIEN ENTRE i.e. 50mb y 600mb) <-- muy complicado
 	- podriamos subir de banda X a Ka <-- tienes  + perdidasm, pones otra antena + otro transmisor <-- lluvia tiene + impacto, + potencia del sat o + ganancia
