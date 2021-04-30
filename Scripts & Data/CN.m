@@ -73,9 +73,9 @@ CNreq = xlsread("MODCODS.xlsx","Hoja1","C2:C23");
 eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 
 % Results
-[D10_1Pass,D10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,30,"YES");
-[D20_1Pass,D20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,30,"YES");
-[D30_1Pass,D30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,30,"YES");
+[DL10_1Pass,DL10_1Pass_med,Pass_time10(:,:)] = Downloaded_Data(t10,PosI10(Pass10),PosF10(Pass10),CNreq,CN10,10,B,eff,30,"YES");
+[DL20_1Pass,DL20_1Pass_med,Pass_time20(:,:)] = Downloaded_Data(t20,PosI20(Pass20),PosF20(Pass20),CNreq,CN20,20,B,eff,30,"YES");
+[DL30_1Pass,DL30_1Pass_med,Pass_time30(:,:)] = Downloaded_Data(t30,PosI30(Pass30),PosF30(Pass30),CNreq,CN30,30,B,eff,30,"YES");
 
 
 %% TASK 5
@@ -84,9 +84,9 @@ eff = xlsread("MODCODS.xlsx","Hoja1","D2:D23");
 exclude = 30;
 
 % Results
-[D10_60Days,D10_60Days_med,trash(:,:)] = Downloaded_Data(t10,PosI10,PosF10,CNreq,CN10,10,B,eff,exclude,"NO");
-[D20_60Days,D20_60Days_med,trash(:,:)] = Downloaded_Data(t20,PosI20,PosF20,CNreq,CN20,20,B,eff,exclude,"NO");
-[D30_60Days,D30_60Days_med,trash(:,:)] = Downloaded_Data(t30,PosI30,PosF30,CNreq,CN30,30,B,eff,exclude,"NO");
+[DL10_60Days,DL10_60Days_med,trash(:,:)] = Downloaded_Data(t10,PosI10,PosF10,CNreq,CN10,10,B,eff,exclude,"NO");
+[DL20_60Days,DL20_60Days_med,trash(:,:)] = Downloaded_Data(t20,PosI20,PosF20,CNreq,CN20,20,B,eff,exclude,"NO");
+[DL30_60Days,DL30_60Days_med,trash(:,:)] = Downloaded_Data(t30,PosI30,PosF30,CNreq,CN30,30,B,eff,exclude,"NO");
 
 %% FUNCTIONS
 
